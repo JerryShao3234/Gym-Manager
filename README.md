@@ -9,5 +9,6 @@ dotnet run --project .\GymManagement.Api\
 2. Create a api controller that to handle that request. Example files in: GymManagement.Api\Controllers (sort of needs step 3 to be done (see steps 3 and 4))
 3. Create a service. Example files in: GymManagement.Application\Services\User
 4. Once you created the service, go and fix the controller so that it actually uses that service. Example files in: GymManagement.Api\Controllers
-5. Add the route (?) to Program.cs in GymManagement.Api
+5. Add the service to the GymManagement.Application/DependencyInjection.cs file. This way, our Program.cs (the main kinda like index.js file) inside our GymManagement.Api/Program.cs can access any service in our GymManagement.Application/Services
+
 
