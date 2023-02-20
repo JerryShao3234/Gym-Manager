@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VPbtBI/AfIvXilSZ7/naWUthIE2mib8jw4Y3f2dwsyRi9tHfXe6sOIXCntePatMxF4F0lTI2N1BE/r8tFUQxEw==",
+  "dgSpecHash": "cSjMu/OmhV1eys/5B5VS4X18gDDQXol2EBtm8egQDlMptaEUsRIAsROYFLvVl2rbaUoiq8R9Q1GQmkIWpXC/pg==",
   "success": true,
   "projectFilePath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Application\\GymManagement.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\andyl\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

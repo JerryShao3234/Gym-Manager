@@ -1,8 +1,11 @@
+using GymManagement.Application;
 using GymManagement.Application.Services.User;
+using GymManagement.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddScoped<IUserService, UserService>();
+    builder.Services.AddApplication();
+    builder.Services.AddInfrastructure();
     builder.Services.AddControllers();
 }
 
