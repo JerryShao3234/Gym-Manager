@@ -1,0 +1,21 @@
+@host = http://localhost:5210
+
+POST {{host}}/user/register
+Content-Type: application/json
+
+{
+    "name": "Grey",
+    "email": "GK1000@gmail.com",
+    "membershipType": "contract"
+}
+
+### 
+
+POST {{host}}/user/register
+Content-Type: application/json
+
+{
+    "name": "NC",
+    "email": "NC1000@gmail.com",
+    "membershipType": "oneDay"
+}
