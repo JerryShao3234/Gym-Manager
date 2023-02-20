@@ -1,3 +1,4 @@
+using GymManagement.Application.Services.User;
 using GymManagement.Contracts.User;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,16 @@ namespace GymManagement.Api.Controllers;
 [Route("user/")]
 
 public class UserController : ControllerBase{
+    private readonly IUserService _userService;
+    public UserController(IUserService userService) {
+        _userService = userService;
+    }
+
     [HttpPost("register")]
 
     public IActionResult Register(RegisterRequest request) {
-        return Ok(request);
+        var registerResult = _userService.Register(request.Name, request.Email, request.MembershipType);
+        var response = new RegisterResult(registerResult.Name, registerResult.Email, registerResult.MembershipType);
+        return Ok(response);
     }
 }
