@@ -1,15 +1,15 @@
 # project_b4e3b_c1i3b_s4v2b
 
 ## How to run the backend? 
-If you are using VSCode, the following extensions are helpful: NuGet Package Manager, NuGet Reverse Package Lookup or smt By Jess Chadwick, Roslynator, REST Client
+If you are using VSCode, the following extensions are helpful: NuGet Package Manager, NuGet Reverse Package Lookup or smt By Jess Chadwick, Roslynator, REST Client.\
 
-First, there are a few "projects". 
-The project flows like this. When we hit an end point, the controller responsible for that uses a service. The service then uses a repository. The repository accesses the DB. 
-`GymManagement.Api` This is the web api, the one with controllers. 
-`GymManagement.Application` This is where our services are. As well as interfaces for our repositories. 
-`GymManagement.Contracts` This is where we define the request and response type of our routes/controllers. I am considering removing this.
-`GymManagement.Domain` I do not fully understand its role in the clean architecture coding practice, but from what I gathered, this is where we define types of things we use throughout the application. 
-`GymManagement.Infrastructure` This is where we create our repository and things that have access to the DB. 
+First, there are a few "projects".\
+The project flows like this. When we hit an end point, the controller responsible for that uses a service. The service then uses a repository. The repository accesses the DB 
+`GymManagement.Api` This is the web api, the one with controllers 
+`GymManagement.Application` This is where our services are. As well as interfaces for our repositories 
+`GymManagement.Contracts` This is where we define the request and response type of our routes/controllers. I am considering removing this
+`GymManagement.Domain` I do not fully understand its role in the clean architecture coding practice, but from what I gathered, this is where we define types of things we use throughout the application 
+`GymManagement.Infrastructure` This is where we create our repository and things that have access to the DB 
 
 To run the solution, we need to add the dependencies for each of the projects above. The `GymManagement.X.csproj` file defines the dependencies needed in the project. It's like a `package.json` file :). For instance, there are no dependencies in the `GymManagement.Api` project, but `GymManagement.Application` has a dependency for `Microsoft.Extensions.DependencyInjection.Abstractions`. Dependencies are usually defined by the `<PackageReference Include="Blah"/>` in a `csproj` file.  
 Here, we can simply run `dotnet add GymManagement.Application package Microsoft.Extensions.DependencyInjection.Abstractions` (if I remember correctly). Repeat this for every project.  
@@ -18,7 +18,7 @@ Next, create a DB called Tutorial2 (yea I will change the name later lol) inside
 ![image](https://media.github.students.cs.ubc.ca/user/7083/files/a0b81534-00dd-4660-8b51-6b8fbcbd91d4)
 
 
-Finally, run the command
+Finally, run the command\
 `dotnet run --project .\GymManagement.Api\`
 
 Once the BE is running and you have the REST Client Extension, you can click use the `Requests` folder that has a `RegisterTest.http` (poor naming I know), and try to send the third request there (The GET one). That request interacts with DB. The other 2 requests purely test the routes and controllers and does not interact with db.  
