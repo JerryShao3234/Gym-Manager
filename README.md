@@ -1,7 +1,7 @@
 # project_b4e3b_c1i3b_s4v2b
 
 ## How to run the backend? 
-If you are using VSCode, the following extensions are helpful: NuGet Package Manager, NuGet Reverse Package Lookup or smt By Jess Chadwick, Roslynator, REST Client.\
+If you are using VSCode, the following extensions are helpful: NuGet Package Manager, NuGet Reverse Package Lookup or smt By Jess Chadwick, Roslynator, REST Client.  
 
 First, there are a few "projects".  
 The project flows like this. When we hit an end point, the controller responsible for that uses a service. The service then uses a repository. The repository accesses the DB   
