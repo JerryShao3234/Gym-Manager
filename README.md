@@ -1,6 +1,8 @@
 # project_b4e3b_c1i3b_s4v2b
 
 ## How to run the backend? 
+First, there are a few "projects". 
+`test`
 dotnet run --project .\GymManagement.Api\
 
 ## How to create a new route -> controller -> service -> repo (?) 
