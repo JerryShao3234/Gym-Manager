@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "L5Bg/8fbADAXAPZ4WAajxfajQvgLY+qR6UAPeCZYjzpgKsUhGxnxZeH2Mt2Mx3ekRCA0ddM9yw9nIChFLx4C8A==",
+  "dgSpecHash": "PGml9cwmW2yiqUTxAjPdMKrwkJ8A2QTRdEPORVRy8AS+VD2dwYPWSae9tevoV0SFeavd8fv7XmZ2Ckq0Bd+XBg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Api\\GymManagement.Api.csproj",
+  "projectFilePath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Api\\GymManagement.Api.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\andyl\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+    "C:\\Users\\andyl\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
+    "C:\\Users\\andyl\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\andyl\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\andyl\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }

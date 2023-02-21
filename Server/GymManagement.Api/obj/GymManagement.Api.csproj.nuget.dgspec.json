@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Api\\GymManagement.Api.csproj": {}
+    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Api\\GymManagement.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Api\\GymManagement.Api.csproj": {
+    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Api\\GymManagement.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Api\\GymManagement.Api.csproj",
+        "projectUniqueName": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Api\\GymManagement.Api.csproj",
         "projectName": "GymManagement.Api",
-        "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Api\\GymManagement.Api.csproj",
+        "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Api\\GymManagement.Api.csproj",
         "packagesPath": "C:\\Users\\andyl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Api\\obj\\",
+        "outputPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\andyl\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -29,11 +29,11 @@
               "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Application\\GymManagement.Application.csproj": {
                 "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Application\\GymManagement.Application.csproj"
               },
-              "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\GymManagement.Contracts.csproj": {
-                "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\GymManagement.Contracts.csproj"
+              "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\GymManagement.Contracts.csproj": {
+                "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\GymManagement.Contracts.csproj"
               },
-              "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj"
+              "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj"
               }
             }
           }
@@ -133,14 +133,14 @@
         }
       }
     },
-    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\GymManagement.Contracts.csproj": {
+    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\GymManagement.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\GymManagement.Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\GymManagement.Contracts.csproj",
         "projectName": "GymManagement.Contracts",
-        "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\GymManagement.Contracts.csproj",
+        "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\GymManagement.Contracts.csproj",
         "packagesPath": "C:\\Users\\andyl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\obj\\",
+        "outputPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\andyl\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -239,14 +239,14 @@
         }
       }
     },
-    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj": {
+    "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj",
         "projectName": "GymManagement.Infrastructure",
-        "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Infrastructure\\GymManagement.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\andyl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\andyl\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -277,6 +277,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[7.0.0, )"

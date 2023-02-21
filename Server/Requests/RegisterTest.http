@@ -19,3 +19,7 @@ Content-Type: application/json
     "email": "NC1000@gmail.com",
     "membershipType": "oneDay"
 }
+
+###
+
+GET {{host}}/user

@@ -19,4 +19,8 @@ public class UserService : IUserService {
         _userRepository.Add(user);
         return new RegisterResult(name, email, membershipType);
     }
+
+    public List<User> GetAll() {
+        return _userRepository.GetAll();
+    }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6izKz7gK09Og+yYhEB5+DzJxGfAseISVMOmaIK+SfOtJ5FrT9E+SpCsA7Qxj4N2o2JdKLaauhDa1iRWyM/AioA==",
+  "dgSpecHash": "acJFrAyN436Khlve6ePlmmx4A1xAZ7lGlSmBDj/0Lemav3lu+hKPi/2kJEXBEI0/fP1wArDKAGEiQ5bz7mW7UA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\Server\\GymManagement.Contracts\\GymManagement.Contracts.csproj",
+  "projectFilePath": "C:\\Users\\andyl\\Documents\\UBC\\CPSC 304\\CPSC 304 AL NC JS Gym\\server\\GymManagement.Contracts\\GymManagement.Contracts.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
