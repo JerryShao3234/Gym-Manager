@@ -10,6 +10,7 @@ The backend flows like this. When we hit an end point, the controller responsibl
 `GymManagement.Contracts` This is where we define the request and response type of our routes/controllers. I am considering removing this  
 `GymManagement.Domain` I do not fully understand its role in the clean architecture coding practice, but from what I gathered, this is where we define types of things we use throughout the application   
 `GymManagement.Infrastructure` This is where we create our repository and things that have access to the DB   
+![image](https://media.github.students.cs.ubc.ca/user/7083/files/dcf3357b-17b3-4c73-8972-25afa409e33f)
 
 To run the solution, we need to add the dependencies for each of the projects above. The `GymManagement.X.csproj` file defines the dependencies needed in the project. It's like a `package.json` file :). For instance, there are no dependencies in the `GymManagement.Api` project, but `GymManagement.Application` has a dependency for `Microsoft.Extensions.DependencyInjection.Abstractions`. Dependencies are usually defined by the `<PackageReference Include="Blah"/>` in a `csproj` file.  
 Here, we can simply run `dotnet add GymManagement.Application package Microsoft.Extensions.DependencyInjection.Abstractions` (if I remember correctly). Repeat this for every project.  
