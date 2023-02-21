@@ -1,4 +1,4 @@
-namespace GymManagement.Application.Services.User;
+namespace GymManagement.Application.Services.Users;
 
 public record RegisterResult(
     string Name,

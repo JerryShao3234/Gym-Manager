@@ -1,4 +1,4 @@
-using GymManagement.Application.Services.User;
+using GymManagement.Application.Services.Users;
 using GymManagement.Contracts.User;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-namespace GymManagement.Application.Services.User;
+namespace GymManagement.Application.Services.Users;
 
 public interface IUserService{
     // currently, there is code duplication where RegisterResult is the same
