@@ -4,7 +4,7 @@
 If you are using VSCode, the following extensions are helpful: NuGet Package Manager, NuGet Reverse Package Lookup or smt By Jess Chadwick, Roslynator, REST Client.  
 
 First, there are a few "projects".  
-The project flows like this. When we hit an end point, the controller responsible for that uses a service. The service then uses a repository. The repository accesses the DB   
+The backend flows like this. When we hit an end point, the controller responsible for that uses a service. The service then uses a repository. The repository accesses the DB   
 `GymManagement.Api` This is the web api, the one with controllers   
 `GymManagement.Application` This is where our services are. As well as interfaces for our repositories   
 `GymManagement.Contracts` This is where we define the request and response type of our routes/controllers. I am considering removing this  
