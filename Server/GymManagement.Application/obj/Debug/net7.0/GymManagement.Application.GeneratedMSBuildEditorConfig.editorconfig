@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GymManagement.Application
-build_property.ProjectDir = c:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\
+build_property.ProjectDir = C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\server\GymManagement.Application\

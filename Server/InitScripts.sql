@@ -100,12 +100,13 @@ CREATE TABLE Involves(
 
 CREATE TABLE Targets(
   Exercise_Name varchar(127),
-  Body_part_name varchar(127),
+  BodyPart_name varchar(127),
   Intensity_rating int,
-  PRIMARY KEY (Exercise_Name, Body_part_name),
+  PRIMARY KEY (Exercise_Name, BodyPart_name),
   FOREIGN KEY (Exercise_Name) references Does_Exercise(Exercise_Name),
-  FOREIGN KEY (Body_part_name) references BodyPart(Name)
+  FOREIGN KEY (BodyPart_name) references BodyPart(Name)
 );
+
 
 CREATE TABLE Uses(
   Class_ID varchar(127),
@@ -252,13 +253,13 @@ INSERT INTO Buys VALUES
   ('Cash', 'M3', 'jeffclune@gmail.com'),
   ('Debit Card', 'M4', 'jjim@ubc.ca'),
   ('Cash', 'M5', 'norm@ubc.ca');
+
 INSERT INTO RegisteredTo VALUES
   ('13:00', 'norm@ubc.ca', '1234 Anystreet Rd, Richmond, BC'),
   ('16:00', 'norm@ubc.ca', '8686 Burns Rd, Burnaby, BC'),
   ('10:00', 'rng@gmail.com', '1234 Anystreet Rd, Richmond, BC'),
   ('13:00', 'jjim@ubc.ca', '32567 Steveston Hwy, Richmond, BC'),
   ('21:00', 'jwong@ubc.ca', '1234 Anystreet Rd, Richmond, BC');    
-
 
 
   
