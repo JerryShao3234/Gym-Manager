@@ -66,10 +66,11 @@ CREATE TABLE Has_Equipment (
   Equipment_name varchar(127),
   Manufacturing_ID varchar(127),
   Ownership_status varchar(127),
-  Gym_Address varchar(127),
+  Gym_Address varchar(127) NOT NULL,
   PRIMARY KEY (Manufacturing_ID),
   FOREIGN KEY (Gym_Address) references Gym(Address)
 );
+
 
 CREATE TABLE Has_EmergencyContact(
   Email varchar(127),
