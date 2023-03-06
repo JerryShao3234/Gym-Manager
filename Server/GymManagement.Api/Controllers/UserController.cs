@@ -25,8 +25,7 @@ public class UserController : ControllerBase
         return Ok(response);
     }
 
-    public OkObjectResult GetAll()
-    {
+    public OkObjectResult GetAll() {
         var response = _userService.GetAll();
         return Ok(response);
     }

@@ -31,10 +31,8 @@ public class UserRepository : IUserRepository
             string sql = "SELECT * FROM Users";
             SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
-            Console.WriteLine("Reading data from table");
-            while (reader.Read()) {
-                var user = new User{Name = reader["Name"].ToString() ?? "", Email = reader["Email"].ToString() ?? "", MembershipType = reader["MembershipType"].ToString() ?? ""};
-                _users.Add(user);
+            if(reader.HasRows) {
+                Console.Write("woo");
             }
             connection.Close();
         }
