@@ -1,0 +1,15 @@
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\bin\Debug\net7.0\GymManagement.Application.deps.json
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\bin\Debug\net7.0\GymManagement.Application.dll
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\bin\Debug\net7.0\GymManagement.Application.pdb
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.csproj.AssemblyReference.cache
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.AssemblyInfoInputs.cache
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.AssemblyInfo.cs
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.csproj.CoreCompileInputs.cache
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.dll
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\refint\GymManagement.Application.dll
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.pdb
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\ref\GymManagement.Application.dll
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\bin\Debug\net7.0\GymManagement.Domain.dll
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\bin\Debug\net7.0\GymManagement.Domain.pdb
+C:\Users\andyl\Documents\UBC\CPSC 304\CPSC 304 AL NC JS Gym\Server\GymManagement.Application\obj\Debug\net7.0\GymManagement.Application.csproj.CopyComplete
