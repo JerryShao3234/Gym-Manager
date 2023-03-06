@@ -24,10 +24,8 @@ public class UserRepository : IUserRepository
     }
 
     public List<User> GetAll () {
-
-
-            string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
-            using (SqlConnection connection = new SqlConnection(connectionString)) {
+        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 
             string sql = "SELECT * FROM Users";
