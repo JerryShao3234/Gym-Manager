@@ -1,0 +1,1 @@
+export { GymTable } from "./GymTable";

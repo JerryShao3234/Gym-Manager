@@ -1,0 +1,10 @@
+table {
+  display: block;
+  height: 100%;
+  overflow-y: auto;
+
+  thead {
+    position: sticky;
+    top: 0;
+  }
+}
