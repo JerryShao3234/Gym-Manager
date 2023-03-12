@@ -10,6 +10,7 @@ The following commands are meant to be run from the project root.
 ```bash
 cd server; dotnet build
 ```
+Additionally, connect to your Microsoft SQL Server Management Studio.
 
 ```bash
 cd client; yarn install
