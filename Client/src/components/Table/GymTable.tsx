@@ -1,5 +1,4 @@
 import { ReactElement, useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
 
 import { getUsers, TableEntry } from "../../util/rest";
 
@@ -43,12 +42,12 @@ export function GymTable(props: GymTableProps) {
 
   return (
     <div className={props.className}>
-      <Table className="table-dark">
+      <table className="table table-dark">
         <thead>
           <tr>{tableHeaders}</tr>
         </thead>
         <tbody>{tableRows}</tbody>
-      </Table>
+      </table>
       <p>{tableHeaders?.length ? "" : "No matching entries found."}</p>
     </div>
   );
