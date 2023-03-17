@@ -5,6 +5,7 @@ import { GymTable } from "../common/GymTable";
 import { GymDropdown } from "../common/GymDropdown";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
+import { AxiosError } from "axios";
 
 enum MembershipType {
   BASIC = "BASIC",
@@ -22,6 +23,7 @@ export function Users() {
   // No need to change this
   const [showForm, setShowForm] = useState(false);
   const [tableData, setTableData] = useState<TableEntry[]>([]);
+  const [networkError, setNetworkError] = useState(false);
 
   // [2] Change this to the default { key: value } pairs of your form.
   const defaultValues = useMemo(() => {
@@ -44,8 +46,9 @@ export function Users() {
 
   // [3] Change getUsers() to whatever your axios GET route is
   useEffect(() => {
-    getUsers().then((users) => {
-      setTableData(users);
+    getUsers().then((users: TableEntry[] | AxiosError) => {
+      if ((users as AxiosError).code === "ERR_NETWORK") setNetworkError(true);
+      else setTableData(users as TableEntry[]);
     });
   }, []);
 
@@ -135,7 +138,11 @@ export function Users() {
       >
         {showForm ? renderForm : <p>Add New Entry</p>}
       </div>
-      <GymTable tableData={tableData} />
+      {networkError ? (
+        <p className="error">Network error. Check that server is running.</p>
+      ) : (
+        <GymTable tableData={tableData} />
+      )}
     </>
   );
 }

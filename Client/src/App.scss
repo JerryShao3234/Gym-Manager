@@ -113,22 +113,23 @@
       }
     }
 
-    p {
-      height: 100%;
-      margin-bottom: 0;
-      width: 100%;
-
-      &.error {
-        color: #d27fa9;
-      }
-    }
-
     &.clickable {
       cursor: pointer;
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.25);
       }
+    }
+  }
+
+  p {
+    height: 100%;
+    margin-bottom: 0;
+    width: 100%;
+
+    &.error {
+      color: #d27fa9;
+      flex: 1;
     }
   }
 }
