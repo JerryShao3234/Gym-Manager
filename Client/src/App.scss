@@ -129,7 +129,10 @@
 
     &.error {
       color: #d27fa9;
-      flex: 1;
+    }
+
+    &.warning {
+      color: #d7c96e;
     }
   }
 }
@@ -137,4 +140,8 @@
 /* General CSS */
 .h-full {
   height: 100%;
+}
+
+.flex-1 {
+  flex: 1;
 }

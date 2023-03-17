@@ -6,9 +6,14 @@ export type TableEntry = { [key: string]: any };
 
 // ===[ USER ]==========================================================================================================
 export async function createUser(data: TableEntry): Promise<TableEntry[]> {
-  return await axios.post(BASE_URL + "user", data).catch((err) => {
-    return err;
-  });
+  return await axios
+    .post(BASE_URL + "user/register", data)
+    .then((response) => {
+      return unwrapResponse(response);
+    })
+    .catch((err) => {
+      return err;
+    });
 }
 
 export async function getUsers(): Promise<TableEntry[]> {

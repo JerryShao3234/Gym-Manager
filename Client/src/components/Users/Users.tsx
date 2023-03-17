@@ -56,8 +56,8 @@ export function Users() {
   const onSubmit = useCallback(
     async (data: FormSchema) => {
       reset(defaultValues);
-      createUser(data).then(() => {
-        alert("Made post request containing:\n" + JSON.stringify(data));
+      createUser(data).then((updatedData) => {
+        setTableData(updatedData);
       });
     },
     [defaultValues, reset]
@@ -129,6 +129,19 @@ export function Users() {
     renderFormButtons,
   ]);
 
+  const getContent = useMemo(() => {
+    if (networkError) {
+      return (
+        <p className="error flex-1">
+          Network error. Check that server is running.
+        </p>
+      );
+    } else if (tableData.length === 0) {
+      return <p className="warning flex-1">No matching entries found.</p>;
+    }
+    return <GymTable tableData={tableData} />;
+  }, [networkError, tableData]);
+
   // Main return statement. Renders your entire component. You don't need to change this.
   return (
     <>
@@ -138,11 +151,7 @@ export function Users() {
       >
         {showForm ? renderForm : <p>Add New Entry</p>}
       </div>
-      {networkError ? (
-        <p className="error">Network error. Check that server is running.</p>
-      ) : (
-        <GymTable tableData={tableData} />
-      )}
+      {getContent}
     </>
   );
 }
