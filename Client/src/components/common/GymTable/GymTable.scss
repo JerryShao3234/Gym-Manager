@@ -1,0 +1,16 @@
+.gym-table {
+  height: 100%;
+  overflow: clip;
+  flex: 1;
+
+  table {
+    display: block;
+    overflow-y: auto;
+    height: 100%;
+
+    thead {
+      position: sticky;
+      top: 0;
+    }
+  }
+}

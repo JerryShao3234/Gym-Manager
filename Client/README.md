@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# Frontend guide
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to build something
 
-## Available Scripts
+**Note:** you can refer to `src/components/Users` as a guide. I've commented stuff there to help you figure out what's going on. 
 
-In the project directory, you can run:
+1. Build your backend stuff, test your route, etc. 
 
-### `yarn start`
+2. In `src/util/rest.ts`, make something like:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   ```TypeScript
+    export async function getSomething(): Promise<TableEntry[]> {}
+   ```
+   The `getUsers()` function can serve as a reference.\
+   Add the prefix of `post`/`get`/`put`/`delete` as per your discrepancy.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+3. Make a new folder under `src/components` with your feature's name,
+then rename `Users` in `Users.tsx`.
+   ```TypeScript
+   export function Users() {}
+   ```  
+   **Note:** There are other steps in that section, but don't follow them yet.
+   Let's focus on making it show up first (in step 4). 
 
-### `yarn test`
+4. Go to `src/App.tsx` and complete the 2 steps listed.
+   _At this point, if your light-blue tab is still empty and you don't know why, ping me (Noreen) to help you debug._
+5. Go back to the folder you created in step 3, then follow the comments in `src/components/Users`.
+   There are 5 steps I think you'll have to do.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Folders
 
-### `yarn build`
+1. `src/components`: for JSX / "stuff you render".
+   - Files end in `.tsx` or `.scss`, except for `index.ts`.
+   - `./common`: Reusable components, such as `Table.tsx`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. `src/util`: for non-JSX stuff, namely sending API requests.
+   - Files end in `.ts`.
+   - `./rest.ts`: Where your calls to the backend goes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+3. Other folders
+   - `public`: don't worry about this
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## FAQ
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Q: I added custom CSS, but it isn't showing up.\
+A: Remember to import your SCSS file. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

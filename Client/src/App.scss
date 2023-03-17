@@ -1,25 +1,139 @@
 .App {
-  background-color: #15151c;
-  color: white;
-
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  background-color: #15151c;
 
+  color: white;
   display: flex;
+
   flex-direction: column;
   height: 100vh;
   overflow-y: hidden;
+  text-align: center;
 
-  .gym-table {
-    max-height: 75vh;
+  h1 {
+    font-family: "Courier New", monospace;
+    font-weight: 900;
+    padding-top: 3rem;
+    text-shadow: 0 0 10px #fff, 0 0 20px #efbddb, 0 0 30px #e60073,
+      0 0 40px #57042f, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+
+  .row {
+    overflow-y: hidden;
+    width: 80%;
+    padding: 2rem 1rem 1rem;
+
+    .nav-link {
+      color: #ddd;
+      margin-bottom: 0.5rem;
+
+      &.active {
+        background-color: #000;
+        box-shadow: 0 0 1rem #ffe53d;
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 1rem rgba(255, 229, 61, 0.25);
+      }
+    }
+
+    .tab-content {
+      border-radius: 0.5rem;
+      box-shadow: 0 0 1rem #42ffff;
+      padding: 1rem;
+      height: 100%;
+
+      .active {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 }
 
-h1 {
-  font-family: "Courier New", monospace;
-  font-weight: 900;
-  text-shadow: 0 0 10px #fff, 0 0 20px #efbddb, 0 0 30px #e60073,
-    0 0 40px #57042f, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-  padding: 1em;
+/* This stuff styles the tab pane */
+.tab-pane {
+  overflow: hidden;
+  height: 100%;
+  align-items: center;
+
+  .well {
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 3rem #000;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 1rem;
+    width: 100%;
+    height: max-content;
+    margin-bottom: 1rem;
+
+    form {
+      button {
+        float: right;
+        margin: 0.25rem;
+        width: max-content;
+
+        &.submit {
+          background-color: #000;
+          float: right;
+
+          &:hover {
+            box-shadow: 0 0 1rem rgba(13, 110, 253, 0.5);
+          }
+        }
+      }
+
+      .input-group {
+        align-items: center;
+        padding: 0.5rem;
+
+        label {
+          margin-right: 0.5rem;
+        }
+
+        input {
+          background: transparent;
+          border-radius: 0.5rem !important;
+          color: white;
+          flex-grow: 1;
+          margin-right: 0.75rem;
+          padding: 0.25rem 0.5rem;
+
+          &.error {
+            border-color: #e60073;
+            background-color: rgba(230, 0, 115, 0.25);
+          }
+        }
+
+        select {
+          border-radius: 0.5rem !important;
+          margin-right: 0.75rem;
+        }
+      }
+    }
+
+    p {
+      height: 100%;
+      margin-bottom: 0;
+      width: 100%;
+
+      &.error {
+        color: #d27fa9;
+      }
+    }
+
+    &.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+}
+
+/* General CSS */
+.h-full {
+  height: 100%;
 }

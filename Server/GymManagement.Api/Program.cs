@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
             innerBuilder =>
             {
                 innerBuilder
-                    .WithOrigins(frontendUrl).AllowAnyMethod();
+                    .WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
             });
     });
     builder.Services.AddMvc();
