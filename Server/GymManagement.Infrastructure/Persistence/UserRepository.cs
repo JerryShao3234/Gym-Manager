@@ -24,9 +24,7 @@ public class UserRepository : IUserRepository
     }
 
     public List<User> GetAll () {
-
-
-            string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 
@@ -41,8 +39,6 @@ public class UserRepository : IUserRepository
             connection.Close();
         }
 
-        var user1 =  new User{Name = "Bobby", Email = "Hey", MembershipType = "Yes"};
-        _users.Add(user1);
         return _users;
     }
 }

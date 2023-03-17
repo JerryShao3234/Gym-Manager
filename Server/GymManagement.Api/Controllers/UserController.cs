@@ -15,10 +15,9 @@ public class UserController : ControllerBase{
     }
 
     [HttpPost("register")]
-
     public IActionResult Register(RegisterRequest request) {
-        var registerResult = _userService.Register(request.Name, request.Email, request.MembershipType);
-        var response = new RegisterResult(registerResult.Name, registerResult.Email, registerResult.MembershipType);
+        _userService.Register(request.Name, request.Email, request.MembershipType);
+        var response = _userService.GetAll();
         return Ok(response);
     }
 
