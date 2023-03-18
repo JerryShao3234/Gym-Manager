@@ -1,0 +1,1 @@
+export { GymInput } from "./GymInput";

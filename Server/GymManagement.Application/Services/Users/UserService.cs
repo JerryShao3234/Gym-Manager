@@ -6,10 +6,10 @@ namespace GymManagement.Application.Services.Users;
 public class UserService : IUserService {
     private readonly IUserRepository _userRepository;
 
-    public UserService(IUserRepository userReposity) {
-        _userRepository = userReposity;
+    public UserService(IUserRepository userRepository) {
+        _userRepository = userRepository;
     }
-    public RegisterResult Register(string name, string email, string membershipType){
+    public List<User> Register(string name, string email, string membershipType){
         // Make sure user does not exist 
         if(_userRepository.GetUserByEmail(email) is not null) {
             throw new Exception("User with given email already exists");
@@ -17,7 +17,7 @@ public class UserService : IUserService {
 
         var user = new User{Name = name, Email = email, MembershipType = membershipType};
         _userRepository.Add(user);
-        return new RegisterResult(name, email, membershipType);
+        return _userRepository.GetAll();
     }
 
     public List<User> GetAll() {
