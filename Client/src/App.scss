@@ -129,10 +129,12 @@
 
     &.error {
       color: #d27fa9;
+      text-shadow: 0 0 5px #000000, 0 0 2px #6c255d;
     }
 
     &.warning {
-      color: #d7c96e;
+      color: #ffe84a;
+      text-shadow: 0 0 5px #000000, 0 0 2px #fffcbe;
     }
   }
 }
