@@ -24,7 +24,7 @@ function App() {
   const renderTabSelector = useMemo(() => {
     const tabs = Object.keys(tabsList).map((tabName) => {
       return (
-        <Nav.Item className="nav-item">
+        <Nav.Item className="nav-item" key={tabName}>
           <Nav.Link eventKey={tabName}>{tabName}</Nav.Link>
         </Nav.Item>
       );

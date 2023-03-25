@@ -25,7 +25,7 @@ then rename `Users` in `Users.tsx`.
 4. Go to `src/App.tsx` and complete the 2 steps listed.
    _At this point, if your light-blue tab is still empty and you don't know why, ping me (Noreen) to help you debug._
 5. Go back to the folder you created in step 3, then follow the comments in `src/components/Users`.
-   There are 5 steps I think you'll have to do.
+   There are 6 steps I think you'll have to do.
 
 ## Folders
 

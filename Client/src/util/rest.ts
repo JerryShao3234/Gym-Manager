@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 const BASE_URL = "http://localhost:5210/";
 
@@ -11,8 +11,8 @@ export async function createUser(data: TableEntry): Promise<TableEntry[]> {
     .then((response) => {
       return unwrapResponse(response);
     })
-    .catch((err) => {
-      return err;
+    .catch((err: AxiosError) => {
+      throwError(err);
     });
 }
 
@@ -22,8 +22,19 @@ export async function getUsers(): Promise<TableEntry[]> {
     .then((response) => {
       return unwrapResponse(response);
     })
-    .catch((err) => {
-      return err;
+    .catch((err: AxiosError) => {
+      throwError(err);
+    });
+}
+
+export async function deleteUser(email: string): Promise<TableEntry[]> {
+  return await axios
+    .delete(BASE_URL + "user/delete/" + email)
+    .then((response) => {
+      return unwrapResponse(response);
+    })
+    .catch((err: AxiosError) => {
+      throwError(err);
     });
 }
 
@@ -36,4 +47,8 @@ export async function getUsers(): Promise<TableEntry[]> {
 // ===[ HELPER FNS ]====================================================================================================
 function unwrapResponse(request: AxiosResponse) {
   return request.data;
+}
+
+function throwError(err: AxiosError) {
+  throw new Error(err.message + "\n\n" + err.response?.data);
 }

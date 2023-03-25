@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createUser, getUsers, TableEntry } from "../../util/rest";
+import { createUser, deleteUser, getUsers, TableEntry } from "../../util/rest";
 import { GymTable } from "../common/GymTable";
 import { GymDropdown } from "../common/GymDropdown";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
-import { AxiosError } from "axios";
 
 enum MembershipType {
   BASIC = "BASIC",
@@ -46,19 +45,27 @@ export function Users() {
 
   // [3] Change getUsers() to whatever your axios GET route is
   useEffect(() => {
-    getUsers().then((users: TableEntry[] | AxiosError) => {
-      if ((users as AxiosError).code === "ERR_NETWORK") setNetworkError(true);
-      else setTableData(users as TableEntry[]);
-    });
+    getUsers()
+      .then((users: TableEntry[]) => {
+        setTableData(users as TableEntry[]);
+      })
+      .catch(() => {
+        setNetworkError(true);
+      });
   }, []);
 
   // [4] Change this to call your POST endpoint.
   const onSubmit = useCallback(
     async (data: FormSchema) => {
       reset(defaultValues);
-      createUser(data).then((updatedData) => {
-        setTableData(updatedData);
-      });
+      createUser(data)
+        .then((updatedData) => {
+          setTableData(updatedData);
+          alert("Successfully added user with email " + data.email);
+        })
+        .catch((error: Error) => {
+          alert(error.message);
+        });
     },
     [defaultValues, reset]
   );
@@ -89,11 +96,10 @@ export function Users() {
 
   // [5] Change the contents of renderForm to whatever you need
   const renderForm = useMemo(() => {
-    const emailErrorClass = errors.email ? "error" : "";
     return (
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <GymInput
-          className={emailErrorClass}
+          className={errors.email ? "error" : ""}
           label="Email"
           control={control}
           formFieldName={"email"}
@@ -129,6 +135,17 @@ export function Users() {
     renderFormButtons,
   ]);
 
+  // [6] Make this call your delete function.
+  const deleteCallback = useCallback(async (entry: TableEntry) => {
+    await deleteUser(entry["email"])
+      .then((response) => {
+        alert("Successfully deleted entry with email " + entry["email"]);
+        setTableData(response);
+      })
+      .catch((e: Error) => alert(e.message));
+  }, []);
+
+  // Shows either the table or a network error message. No need to change.
   const getContent = useMemo(() => {
     if (networkError) {
       return (
@@ -139,8 +156,8 @@ export function Users() {
     } else if (tableData.length === 0) {
       return <p className="warning flex-1">No matching entries found.</p>;
     }
-    return <GymTable tableData={tableData} />;
-  }, [networkError, tableData]);
+    return <GymTable tableData={tableData} deleteCallback={deleteCallback} />;
+  }, [deleteCallback, networkError, tableData]);
 
   // Main return statement. Renders your entire component. You don't need to change this.
   return (

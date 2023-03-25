@@ -1,4 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
+import { TrashFill } from "react-bootstrap-icons";
 
 import { TableEntry } from "../../../util/rest";
 
@@ -6,10 +7,15 @@ import "./GymTable.scss";
 
 interface GymTableProps {
   tableData: TableEntry[];
+  deleteCallback: (entry: TableEntry) => void;
   className?: string;
 }
 
-export function GymTable({ tableData, className }: GymTableProps) {
+export function GymTable({
+  tableData,
+  deleteCallback,
+  className,
+}: GymTableProps) {
   const [tableRows, setTableRows] = useState<ReactElement[]>();
   const [tableHeaders, setTableHeaders] = useState<ReactElement[]>();
 
@@ -24,17 +30,28 @@ export function GymTable({ tableData, className }: GymTableProps) {
           {headerName}
         </th>
       ));
+      headers.push(<th key={"header-delete"}></th>);
+
       rows = Object.values(tableData).map((entry, rowIndex) => {
         const rowData = headerNames.map((headerName, colIndex) => (
           <td key={`entry-${rowIndex}-${colIndex}`}>{entry[headerName]}</td>
         ));
+        rowData.push(
+          <td
+            key={`entry-${rowIndex}-delete`}
+            className="delete"
+            onClick={() => deleteCallback(entry)}
+          >
+            <TrashFill />
+          </td>
+        );
         return <tr key={`row-${rowIndex}`}>{rowData}</tr>;
       });
     }
 
     setTableHeaders(headers);
     setTableRows(rows);
-  }, [tableData]);
+  }, [deleteCallback, tableData]);
 
   return (
     <div className={`gym-table ${className}`}>

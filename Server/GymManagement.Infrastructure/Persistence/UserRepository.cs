@@ -15,7 +15,13 @@ public class UserRepository : IUserRepository
     }
     public void Add(User user)
     {
+        Console.WriteLine("Adding user " + user.Email);
         _users.Add(user);
+    }
+    public void Delete(User user)
+    {
+        Console.WriteLine("Deleting user " + user.Email);
+        _users.Remove(user);
     }
 
     public User? GetUserByEmail(string email)
