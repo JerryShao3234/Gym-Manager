@@ -12,5 +12,18 @@
       position: sticky;
       top: 0;
     }
+
+    tr:hover td {
+      background-color: #30393b;
+    }
+
+    td.delete {
+      cursor: pointer;
+
+      &:hover {
+        color: #efbddb;
+        background-color: #57042f;
+      }
+    }
   }
 }

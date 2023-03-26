@@ -16,9 +16,28 @@ public class UserController : ControllerBase{
 
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request) {
-        _userService.Register(request.Name, request.Email, request.MembershipType);
-        var response = _userService.GetAll();
-        return Ok(response);
+        try
+        {
+            var result = _userService.Register(request.Name, request.Email, request.MembershipType);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
+    [HttpDelete("delete/{email}")]
+    public IActionResult Delete(string email) {
+        try
+        {
+            var result = _userService.Delete(email);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     public OkObjectResult GetAll() {

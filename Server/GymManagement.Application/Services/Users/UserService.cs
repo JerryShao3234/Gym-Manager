@@ -19,6 +19,18 @@ public class UserService : IUserService {
         _userRepository.Add(user);
         return _userRepository.GetAll();
     }
+    
+    public List<User> Delete(string email)
+    {
+        var user = _userRepository.GetUserByEmail(email);
+        
+        if (user is null) {
+            throw new Exception("Unable to delete. User with email " + email + " is not a registered user.");
+        }
+
+        _userRepository.Delete(user);
+        return _userRepository.GetAll();
+    }
 
     public List<User> GetAll() {
         return _userRepository.GetAll();
