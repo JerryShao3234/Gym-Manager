@@ -57,15 +57,14 @@ export function Users() {
   // [4] Change this to call your POST endpoint.
   const onSubmit = useCallback(
     async (data: FormSchema) => {
-      reset(defaultValues);
-      createUser(data)
-        .then((updatedData) => {
-          setTableData(updatedData);
-          alert("Successfully added user with email " + data.email);
-        })
-        .catch((error: Error) => {
-          alert(error.message);
-        });
+      try {
+        const updatedData = await createUser(data);
+        reset(defaultValues);
+        setTableData(updatedData);
+        alert("Successfully added user with email " + data.email);
+      } catch (err: any) {
+        alert(err.message);
+      }
     },
     [defaultValues, reset]
   );
@@ -137,12 +136,13 @@ export function Users() {
 
   // [6] Make this call your delete function.
   const deleteCallback = useCallback(async (entry: TableEntry) => {
-    await deleteUser(entry["email"])
-      .then((response) => {
-        alert("Successfully deleted entry with email " + entry["email"]);
-        setTableData(response);
-      })
-      .catch((e: Error) => alert(e.message));
+    try {
+      const response = await deleteUser(entry["email"]);
+      alert("Successfully deleted entry with email " + entry["email"]);
+      setTableData(response);
+    } catch (err: any) {
+      alert(err.message);
+    }
   }, []);
 
   // Shows either the table or a network error message. No need to change.
