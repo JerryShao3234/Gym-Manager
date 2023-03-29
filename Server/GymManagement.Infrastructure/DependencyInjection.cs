@@ -8,6 +8,7 @@ public static class DependencyInjection {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services) {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IClassRepository, ClassRepository>();
+        services.AddScoped<ITargetsRepository, TargetsRepository>();
         return services;
     }
 }

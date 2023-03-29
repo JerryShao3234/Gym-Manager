@@ -5,6 +5,20 @@ CREATE TABLE Does_Exercise (
   PRIMARY KEY (Exercise_Name),
 );
 
+CREATE TABLE BodyPart (
+  bp_Name varchar(127),
+  PRIMARY KEY (bp_Name)
+);
+
+CREATE TABLE Targets(
+  Exercise_Name varchar(127),
+  BodyPart_name varchar(127),
+  Intensity_rating int,
+  PRIMARY KEY (Exercise_Name, BodyPart_name),
+  FOREIGN KEY (Exercise_Name) references Tutorial2.dbo.Does_Exercise(Exercise_Name),
+  FOREIGN KEY (BodyPart_name) references Tutorial2.dbo.BodyPart(bp_Name)
+);
+
 CREATE TABLE Class (
   Class_ID varchar(127),
   Price int,
@@ -28,3 +42,22 @@ INSERT INTO Class VALUES ('Class2', 10, 'Class2', '11:00:00', '12:00:00', 'Instr
 INSERT INTO Class VALUES ('Class3', 10, 'Class3', '12:00:00', '13:00:00', 'Instructor3', 'Deadlift');
 INSERT INTO Class VALUES ('Class4', 10, 'Class4', '13:00:00', '14:00:00', 'Instructor4', 'Curls');
 INSERT INTO Class VALUES ('Class5', 10, 'Class5', '14:00:00', '15:00:00', 'Instructor5', 'Shoulder Press');
+
+
+INSERT INTO BodyPart VALUES
+  ('Chest'),
+  ('Arms'),
+  ('Legs'),
+  ('Back'),
+  ('Shoulders');
+
+INSERT INTO Targets VALUES
+  ('Curls', 'Arms', 2),
+  ('Bench Press', 'Chest', 2),
+  ('Squat', 'Legs', 2),
+  ('Shoulder Press', 'Shoulders', 2),
+  ('Bench Press', 'Arms', 2);
+
+
+
+
