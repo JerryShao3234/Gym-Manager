@@ -15,7 +15,7 @@ public class TargetsRepository : ITargetsRepository
     public List<string> Get(int intensityRating)
     {
         Console.WriteLine("Getting target for intensity rating " + intensityRating);
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
             //select exercises that over all bodyparts have an average intensity rating of at least the given intensity rating

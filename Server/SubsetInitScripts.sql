@@ -15,8 +15,8 @@ CREATE TABLE Targets(
   BodyPart_name varchar(127),
   Intensity_rating int,
   PRIMARY KEY (Exercise_Name, BodyPart_name),
-  FOREIGN KEY (Exercise_Name) references Tutorial2.dbo.Does_Exercise(Exercise_Name),
-  FOREIGN KEY (BodyPart_name) references Tutorial2.dbo.BodyPart(bp_Name)
+  FOREIGN KEY (Exercise_Name) references CPSC304_GymManagement.dbo.Does_Exercise(Exercise_Name),
+  FOREIGN KEY (BodyPart_name) references CPSC304_GymManagement.dbo.BodyPart(bp_Name)
 );
 
 CREATE TABLE Class (

@@ -16,7 +16,7 @@ public class UserRepository : IUserRepository
     {
         Console.WriteLine("Adding user " + user.Email);
 
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 
@@ -33,7 +33,7 @@ public class UserRepository : IUserRepository
     {
         Console.WriteLine("Deleting user " + user.Email);
 
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 
@@ -47,7 +47,7 @@ public class UserRepository : IUserRepository
 
     public User? GetUserByEmail(string email)
     {
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 
@@ -68,7 +68,7 @@ public class UserRepository : IUserRepository
 
     public List<User> GetAll () {
         List<User> _users = new List<User>();
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 

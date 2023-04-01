@@ -17,7 +17,7 @@ public class ClassRepository : IClassRepository
     {
         Console.WriteLine("Adding class " + c.Name);
 
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
 
@@ -39,7 +39,7 @@ public class ClassRepository : IClassRepository
     {
         //select from class table all the attributes in req
         Console.WriteLine("Getting class for " + req);
-        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        string connectionString = "Data Source=localhost;Initial Catalog=CPSC304_GymManagement;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
             //select from class table all the attributes in req
