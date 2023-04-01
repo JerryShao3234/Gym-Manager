@@ -29,4 +29,36 @@ public class ClassController : ControllerBase{
             return BadRequest(e.Message);
         }
     }
+
+    [HttpGet("get")]
+    public IActionResult Get(string price, string start_time, string end_time, string instructor_name, string exercise_name, string name, string class_ID) {
+        Console.WriteLine("Class get called!");
+        //sample request url: http://localhost:5000/class/get?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1
+        //get the parameters from the request
+        try
+        {
+            var req = new List<string>();
+            if(!price.Equals("null"))
+                req.Add("price");
+            if(!start_time.Equals("null"))
+                req.Add("start_time");
+            if(!end_time.Equals("null"))
+                req.Add("end_time");
+            if(!instructor_name.Equals("null"))
+                req.Add("instructor_name");
+            if(!exercise_name.Equals("null"))
+                req.Add("exercise_name");
+            if(!name.Equals("null"))
+                req.Add("name");
+            if(!class_ID.Equals("null"))
+                req.Add("class_ID");
+            var classes = _classService.Get(req);
+            return Ok(classes);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("something went wrong");
+            return BadRequest(e.Message);
+        }
+    }
 }
