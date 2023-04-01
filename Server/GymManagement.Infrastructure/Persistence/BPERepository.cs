@@ -17,6 +17,7 @@ public class BPERepository : IBPERepository
     public List<string> GetBodyPart(string exercise)
     {
         Console.WriteLine("Hello World2");
+        
         return _bodyparts;
     }
 
