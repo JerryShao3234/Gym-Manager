@@ -24,7 +24,6 @@ export function GymTable({
     let rows: ReactElement[] = [];
 
     if (tableData && tableData[0]) {
-      console.log(tableData)
       const headerNames = Object.keys(tableData[0]);
       headers = headerNames.map((headerName) => (
         <th scope="col" key={headerName}>
