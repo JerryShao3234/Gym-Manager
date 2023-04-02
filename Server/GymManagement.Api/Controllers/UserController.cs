@@ -40,8 +40,11 @@ public class UserController : ControllerBase{
         }
     }
 
-    public OkObjectResult GetAll() {
-        var response = _userService.GetAll();
-        return Ok(response);
+    [HttpGet("{optionalFilter}")]
+    public OkObjectResult GetAll(Object? optionalFilter) {
+        Console.WriteLine("Optional filter is: " + optionalFilter);
+        List<User> response; 
+        response = _userService.GetAll(optionalFilter);
+        return Ok(response); 
     }
 }

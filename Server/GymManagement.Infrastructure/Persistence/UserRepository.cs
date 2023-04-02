@@ -66,7 +66,7 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    public List<User> GetAll () {
+    public List<User> GetAll (Object? optionalFilter) {
         List<User> _users = new List<User>();
         string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString)) {

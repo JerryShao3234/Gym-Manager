@@ -7,5 +7,5 @@ public interface IUserService {
     
     List<User> Delete(string email);
 
-    List<User> GetAll();
+    List<User> GetAll(Object? optionalFilter);
 }
