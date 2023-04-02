@@ -1,13 +1,14 @@
 import React, { ReactElement, useMemo } from "react";
 import "./App.scss";
 import { Users } from "./components/Users";
+import { Exercises } from "./components/Exercises/Exercises";
 import { Class } from "./components/Class";
 import { Col, Nav, Row, Tab } from "react-bootstrap";
 
 // [1] Update enum with your component name
 enum AVAILABLE_TABS {
   USERS = "USERS",
-  ANDYS_THING = "ANDYS_THING",
+  EXERCISES = "EXERCISES",
   CLASS = "CLASS",
 }
 
@@ -16,7 +17,7 @@ function App() {
   const tabsList = useMemo((): { [key in AVAILABLE_TABS]: ReactElement } => {
     return {
       USERS: <Users />,
-      ANDYS_THING: <div>ANDYS_THING</div>,
+      EXERCISES: <Exercises />,
       CLASS: <Class />,
     };
   }, []);
