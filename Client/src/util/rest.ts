@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 
-const BASE_URL = "http://localhost:5210/";
+export const BASE_URL = "http://localhost:5210/";
 
 export type TableEntry = { [key: string]: any };
 
@@ -39,10 +39,10 @@ export async function deleteUser(email: string): Promise<TableEntry[]> {
 // TODO
 
 // ===[ HELPER FNS ]====================================================================================================
-function unwrapResponse(request: AxiosResponse) {
+export function unwrapResponse(request: AxiosResponse) {
   return request.data;
 }
 
-function getErrorMessage(err: AxiosError) {
+export function getErrorMessage(err: AxiosError) {
   return err.message + "\n\n" + err.response?.data;
 }

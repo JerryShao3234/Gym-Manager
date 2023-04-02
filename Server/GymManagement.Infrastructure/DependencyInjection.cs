@@ -9,6 +9,7 @@ public static class DependencyInjection {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IClassRepository, ClassRepository>();
         services.AddScoped<ITargetsRepository, TargetsRepository>();
+        services.AddScoped<IExerciseRepository, ExerciseRepository>();
         return services;
     }
 }
