@@ -9,12 +9,14 @@ interface GymTableProps {
   tableData: TableEntry[];
   deleteCallback: (entry: TableEntry) => void;
   className?: string;
+  haveDelete?: boolean;
 }
 
 export function GymTable({
   tableData,
   deleteCallback,
   className,
+  haveDelete = true,
 }: GymTableProps) {
   const [tableRows, setTableRows] = useState<ReactElement[]>();
   const [tableHeaders, setTableHeaders] = useState<ReactElement[]>();
@@ -36,15 +38,21 @@ export function GymTable({
         const rowData = headerNames.map((headerName, colIndex) => (
           <td key={`entry-${rowIndex}-${colIndex}`}>{entry[headerName]}</td>
         ));
-        rowData.push(
-          <td
-            key={`entry-${rowIndex}-delete`}
-            className="delete"
-            onClick={() => deleteCallback(entry)}
-          >
-            <TrashFill />
-          </td>
-        );
+        
+        //only render delete button if haveDelete is true
+        if (haveDelete) {
+          rowData.push(
+            <td
+              key={`entry-${rowIndex}-delete`}
+              className="delete"
+              onClick={() => deleteCallback(entry)}
+            >
+              <TrashFill />
+            </td>
+          );
+        } else {
+          rowData.push(<td key={`entry-${rowIndex}-delete`}></td>);
+        }
         return <tr key={`row-${rowIndex}`}>{rowData}</tr>;
       });
     }

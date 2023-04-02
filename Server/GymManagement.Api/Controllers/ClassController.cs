@@ -26,6 +26,7 @@ public class ClassController : ControllerBase{
         }
         catch (Exception e)
         {
+            Console.WriteLine("something went wrong with adding a class");
             return BadRequest(e.Message);
         }
     }

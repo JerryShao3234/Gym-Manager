@@ -78,7 +78,7 @@ public class ClassRepository : IClassRepository
                     instructor_name = reader["Instructor_name"].ToString();
                 if(req.Contains("exercise_name"))
                     exercise_name = reader["Exercise_Name"].ToString();
-                classes.Add(new Class(name, price, start_time, end_time, instructor_name, class_ID, exercise_name));
+                classes.Add(new Class(name, class_ID, price, start_time, end_time, instructor_name, exercise_name));
             }
             connection.Close();
             return classes;
