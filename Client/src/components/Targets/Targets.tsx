@@ -1,0 +1,140 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
+import { getExercisesWithIntensity, TableEntry } from "../../util/rest";
+import { GymTable } from "../common/GymTable";
+import { GymDropdown } from "../common/GymDropdown";
+import { Button } from "react-bootstrap";
+import { GymInput } from "../common/GymInput";
+
+interface FormData {
+    intensity: string;
+}
+
+export function Targets() {
+    const [showForm, setShowForm] = useState(false);
+    const [tableData, setTableData] = useState<TableEntry[]>([]);
+    const [networkError, setNetworkError] = useState(false);
+
+    const defaultValues = useMemo(() => {
+        return {
+            intensity: "1",
+        };
+    }, []);
+
+    const {
+        reset,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm({
+        defaultValues: defaultValues,
+    });
+
+    const getContent = useMemo(() => {
+        if (networkError) {
+            return (
+                <p className="error flex-1">
+                    Network error. Check that server is running.
+                </p>
+            );
+        } else if (tableData.length === 0) {
+            return <p className="warning flex-1">No matching entries found.</p>;
+        }
+        return <GymTable haveDelete={false} tableData={tableData} deleteCallback={function (entry: TableEntry): void {
+            throw new Error("Delete is not necessary for this feature.");
+        }} />;
+    }, [networkError, tableData]);
+
+    useEffect(() => {
+        getExercisesWithIntensity("0")
+            .then((classes: TableEntry[]) => {
+                let temp: TableEntry[] = [];
+                    for (let i = 0; i < classes.length; i++) {
+                        let entry: TableEntry = {
+                            "Exercise" : classes[i]
+                        };
+                        temp.push(entry);
+                    }
+                setTableData(temp as TableEntry[]);
+            })
+            .catch(() => {
+                setNetworkError(true);
+            });
+    }, []);
+
+
+    const onSubmit = useCallback(
+        async (data: FormData) => {
+            getExercisesWithIntensity(data.intensity)
+                .then((classes: TableEntry[]) => {
+                    let temp: TableEntry[] = [];
+                    for (let i = 0; i < classes.length; i++) {
+                        let entry: TableEntry = {
+                            "Exercise" : classes[i]
+                        };
+                        temp.push(entry);
+                    }
+                    setTableData(temp as TableEntry[]);
+                })
+                .catch(() => {
+                    setNetworkError(true);
+                });
+        },
+        []
+    );
+
+    const onError = useCallback(async () => {
+        // do nothing
+    }, []);
+
+    const renderFormButtons = useMemo(() => {
+        return (
+            <div className="input-group justify-content-end">
+                <Button
+                    type="button"
+                    className="cancel btn-dark"
+                    onClick={() => setShowForm(false)}
+                >
+                    Cancel
+                </Button>
+                <Button className="submit" type="submit">
+                    Select
+                </Button>
+            </div>
+        );
+    }, []);
+
+    const renderForm = useMemo(() => {
+        return (
+          <form onSubmit={handleSubmit(onSubmit, onError)}>
+            <GymInput
+              className={errors.intensity ? "error" : ""}
+              label="Intensity"
+              control={control}
+              formFieldName={"intensity"}
+              rules={{ required: true }}
+              inputError={errors.intensity}
+            />
+            {renderFormButtons}
+          </form>
+        );
+      }, [
+        control,
+        handleSubmit,
+        onError,
+        onSubmit,
+        renderFormButtons,
+      ]);
+    
+      return (
+        <>
+          <div
+            className={`well ${showForm ? "" : "clickable"}`}
+            onClick={showForm ? undefined : () => setShowForm(true)}
+          >
+            {showForm ? renderForm : <p>Select by intensity</p>}
+          </div>
+          {getContent}
+        </>
+      );
+}
