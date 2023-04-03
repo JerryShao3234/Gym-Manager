@@ -1,0 +1,22 @@
+.advanced-user-filter {
+
+    .check-box-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+
+        label {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+
+            input {
+                margin-right:10px;
+            }
+        }
+        
+    }
+
+}

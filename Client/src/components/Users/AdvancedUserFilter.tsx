@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { MembershipType } from './Users';
-
+import "./AdvancedUserFilter.scss"
 export interface IAdvancedUserFilterProps {
     setFilter: React.Dispatch<React.SetStateAction<any>>
 }
@@ -23,30 +23,34 @@ export function AdvancedUserFilter ({setFilter}: IAdvancedUserFilterProps) {
         
     }, [proChecked, basicChecked, setFilter])
     return (
-    <div>
-        Show all members with Basic and/or Pro memberships: 
-        <label>
-            <input 
-                type="checkbox"
-                checked = {basicChecked}
-                onChange = {() => {
-                    setBasicChecked(!basicChecked)
-                    
-                }} 
-            /> 
-            Basic
-        </label>
-        <label>
-            <input 
-                type="checkbox" 
-                checked = {proChecked}
-                onChange = {() => {
-                    console.log('hhere')
-                    setProChecked(!proChecked)
-                }}
-            /> 
-            Pro
-        </label>
+    <div className = "advanced-user-filter">
+        <div> 
+            Show all members with Basic and/or Pro memberships: 
+        </div>
+        <div className="check-box-container">
+            <label>
+                <input 
+                    type="checkbox"
+                    checked = {basicChecked}
+                    onChange = {() => {
+                        setBasicChecked(!basicChecked)
+                        
+                    }} 
+                /> 
+                Basic
+            </label>
+            <label>
+                <input 
+                    type="checkbox" 
+                    checked = {proChecked}
+                    onChange = {() => {
+                        console.log('hhere')
+                        setProChecked(!proChecked)
+                    }}
+                /> 
+                Pro
+            </label>
+        </div>
     </div>
     );
 }
