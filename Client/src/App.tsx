@@ -3,6 +3,7 @@ import "./App.scss";
 import { Users } from "./components/Users";
 import { Exercises } from "./components/Exercises/Exercises";
 import { Class } from "./components/Class";
+import { Targets } from "./components/Targets";
 import { Col, Nav, Row, Tab } from "react-bootstrap";
 
 // [1] Update enum with your component name
@@ -10,6 +11,7 @@ enum AVAILABLE_TABS {
   USERS = "USERS",
   EXERCISES = "EXERCISES",
   CLASS = "CLASS",
+  TARGETS = "TARGETS"
 }
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
       USERS: <Users />,
       EXERCISES: <Exercises />,
       CLASS: <Class />,
+      TARGETS: <Targets />
     };
   }, []);
 

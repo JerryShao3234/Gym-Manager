@@ -53,6 +53,15 @@ export async function getClasses(): Promise<TableEntry[]> {
   }
 }
 
+export async function getExercisesWithIntensity(intensity: string): Promise<TableEntry[]> {
+  try {
+    const response = await axios.get(BASE_URL + "targets/get/" + intensity);
+    return unwrapResponse(response);
+  } catch (err: any) {
+    throw new Error(getErrorMessage(err));
+  }
+}
+
 // ===[ EQUIPMENT ]=====================================================================================================
 // TODO
 
