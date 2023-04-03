@@ -49,12 +49,12 @@ export function Targets() {
         getExercisesWithIntensity("0")
             .then((classes: TableEntry[]) => {
                 let temp: TableEntry[] = [];
-                    for (let i = 0; i < classes.length; i++) {
-                        let entry: TableEntry = {
-                            "Exercise" : classes[i]
-                        };
-                        temp.push(entry);
-                    }
+                for (let i = 0; i < classes.length; i++) {
+                    let entry: TableEntry = {
+                        "Exercise": classes[i]
+                    };
+                    temp.push(entry);
+                }
                 setTableData(temp as TableEntry[]);
             })
             .catch(() => {
@@ -70,7 +70,7 @@ export function Targets() {
                     let temp: TableEntry[] = [];
                     for (let i = 0; i < classes.length; i++) {
                         let entry: TableEntry = {
-                            "Exercise" : classes[i]
+                            "Exercise": classes[i]
                         };
                         temp.push(entry);
                     }
@@ -106,35 +106,38 @@ export function Targets() {
 
     const renderForm = useMemo(() => {
         return (
-          <form onSubmit={handleSubmit(onSubmit, onError)}>
-            <GymInput
-              className={errors.intensity ? "error" : ""}
-              label="Intensity"
-              control={control}
-              formFieldName={"intensity"}
-              rules={{ required: true }}
-              inputError={errors.intensity}
-            />
-            {renderFormButtons}
-          </form>
+            <form onSubmit={handleSubmit(onSubmit, onError)}>
+                <GymInput
+                    className={errors.intensity ? "error" : ""}
+                    label="Intensity"
+                    control={control}
+                    formFieldName={"intensity"}
+                    rules={{ required: true }}
+                    inputError={errors.intensity}
+                />
+                {renderFormButtons}
+            </form>
         );
-      }, [
+    }, [
         control,
         handleSubmit,
         onError,
         onSubmit,
         renderFormButtons,
-      ]);
-    
-      return (
+    ]);
+
+    return (
         <>
-          <div
-            className={`well ${showForm ? "" : "clickable"}`}
-            onClick={showForm ? undefined : () => setShowForm(true)}
-          >
-            {showForm ? renderForm : <p>Select by intensity</p>}
-          </div>
-          {getContent}
+            <div
+                className={`well ${showForm ? "" : "clickable"}`}
+                onClick={showForm ? undefined : () => setShowForm(true)}
+            >
+                {showForm ? renderForm : <p>Select by intensity</p>}
+            </div>
+            {getContent}
+            <div>
+                Exercises that over all bodyparts have an average intensity rating of at least the given intensity rating
+            </div>
         </>
-      );
+    );
 }
