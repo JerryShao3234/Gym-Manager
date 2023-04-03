@@ -71,15 +71,22 @@ public class UserRepository : IUserRepository
         string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
-
-            string sql = "SELECT * FROM Users";
-            SqlCommand command = new SqlCommand(sql, connection);
+            SqlCommand command;
+            if(optionalFilter == null) {
+                string sql = "SELECT * FROM Users";
+                command = new SqlCommand(sql, connection); 
+            } else {
+                string sql = "SELECT * FROM Users WHERE MembershipType = @MembershipType";
+                command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@MembershipType", ((string)optionalFilter).Trim() == "PRO" ? "Pro" : "Basic");
+            }
             SqlDataReader reader = command.ExecuteReader();
             Console.WriteLine("Reading data from table");
             while (reader.Read()) {
                 var user = new User{Name = reader["Name"].ToString() ?? "", Email = reader["Email"].ToString() ?? "", MembershipType = reader["MembershipType"].ToString() ?? ""};
                 _users.Add(user);
             }
+            
             connection.Close();
         }
 

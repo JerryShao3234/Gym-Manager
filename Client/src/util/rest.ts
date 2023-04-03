@@ -16,7 +16,13 @@ export async function createUser(data: TableEntry): Promise<TableEntry[]> {
 
 export async function getUsers(optionalFilter: any): Promise<TableEntry[]> {
   try {
-    const response = await axios.get(BASE_URL + "user/" + optionalFilter);
+    let response;
+    if(optionalFilter) {
+      console.log("Filter: ", optionalFilter)
+      response = await axios.get(BASE_URL + "user/" + optionalFilter.membershipType)
+    } else {
+      response =  await axios.get(BASE_URL + "user/");
+    }
     return unwrapResponse(response);
   } catch (err: any) {
     throw new Error(getErrorMessage(err));

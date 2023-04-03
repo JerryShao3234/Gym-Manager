@@ -5,8 +5,9 @@ import { GymTable } from "../common/GymTable";
 import { GymDropdown } from "../common/GymDropdown";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
+import { AdvancedUserFilter } from "./AdvancedUserFilter";
 
-enum MembershipType {
+export enum MembershipType {
   BASIC = "BASIC",
   PRO = "PRO",
 }
@@ -23,6 +24,7 @@ export function Users() {
   const [showForm, setShowForm] = useState(false);
   const [tableData, setTableData] = useState<TableEntry[]>([]);
   const [networkError, setNetworkError] = useState(false);
+  const [filter, setFilter]= useState<any>(null); // type is any incase we want to add future filters
 
   // [2] Change this to the default { key: value } pairs of your form.
   const defaultValues = useMemo(() => {
@@ -45,14 +47,14 @@ export function Users() {
 
   // [3] Change getUsers() to whatever your axios GET route is
   useEffect(() => {
-    getUsers(null)
+    getUsers(filter)
       .then((users: TableEntry[]) => {
         setTableData(users as TableEntry[]);
       })
       .catch(() => {
         setNetworkError(true);
       });
-  }, []);
+  }, [filter]);
 
   // [4] Change this to call your POST endpoint.
   const onSubmit = useCallback(
@@ -169,6 +171,7 @@ export function Users() {
         {showForm ? renderForm : <p>Add New Entry</p>}
       </div>
       {getContent}
+      <AdvancedUserFilter setFilter = {setFilter} />
     </>
   );
 }

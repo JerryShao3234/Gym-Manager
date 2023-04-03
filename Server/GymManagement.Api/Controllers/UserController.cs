@@ -8,6 +8,7 @@ namespace GymManagement.Api.Controllers;
 [ApiController]
 [Route("user/")]
 
+
 public class UserController : ControllerBase{
     private readonly IUserService _userService;
     public UserController(IUserService userService) {
@@ -40,9 +41,8 @@ public class UserController : ControllerBase{
         }
     }
 
-    [HttpGet("{optionalFilter}")]
-    public OkObjectResult GetAll(Object? optionalFilter) {
-        Console.WriteLine("Optional filter is: " + optionalFilter);
+    [HttpGet("{optionalFilter?}")]
+    public OkObjectResult GetAll(String? optionalFilter) {
         List<User> response; 
         response = _userService.GetAll(optionalFilter);
         return Ok(response); 
