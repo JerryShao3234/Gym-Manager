@@ -17,7 +17,7 @@ public class UserService : IUserService {
 
         var user = new User{Name = name, Email = email, MembershipType = membershipType};
         _userRepository.Add(user);
-        return _userRepository.GetAll();
+        return _userRepository.GetAll(null);
     }
     
     public List<User> Delete(string email)
@@ -29,10 +29,10 @@ public class UserService : IUserService {
         }
 
         _userRepository.Delete(user);
-        return _userRepository.GetAll();
+        return _userRepository.GetAll(null);
     }
 
-    public List<User> GetAll() {
-        return _userRepository.GetAll();
+    public List<User> GetAll(Object? optionalFilter) {
+        return _userRepository.GetAll(optionalFilter);
     }
 }

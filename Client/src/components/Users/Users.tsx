@@ -45,7 +45,7 @@ export function Users() {
 
   // [3] Change getUsers() to whatever your axios GET route is
   useEffect(() => {
-    getUsers()
+    getUsers(null)
       .then((users: TableEntry[]) => {
         setTableData(users as TableEntry[]);
       })
