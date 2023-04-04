@@ -46,6 +46,8 @@ export function Users() {
     defaultValues: defaultValues,
   });
 
+  // [3] Change getUsers() to whatever your axios GET route is
+
   const initMemberCount = useCallback((memberCountInfo: any) => {
     let numbMembers = 0;
     for (let memberCount of memberCountInfo) {
@@ -54,7 +56,6 @@ export function Users() {
     setMemberCount(numbMembers);
   }, []);
 
-  // [3] Change getUsers() to whatever your axios GET route is
   const initTable = useCallback(async () => {
     try {
       const response = await getUsers(filter);
@@ -181,14 +182,18 @@ export function Users() {
   return (
     <>
       <div
-        className={`well ${showForm ? "" : "clickable"}`}
+        className={`well ${showForm ? "collapsed" : "clickable"}`}
         onClick={showForm ? undefined : () => setShowForm(true)}
       >
         {showForm ? renderForm : <p>Add New Entry</p>}
       </div>
-      {getContent}
-      <AdvancedUserFilter setFilter={setFilter} />
-      <AdvancedUserCount memberCount={memberCount} />
+      <div className="gym-row">
+        {getContent}
+        <div className="additional-content">
+          <AdvancedUserFilter setFilter={setFilter} />
+          <AdvancedUserCount memberCount={memberCount} />
+        </div>
+      </div>
     </>
   );
 }
