@@ -32,13 +32,13 @@ export function GymTable({
           {headerName}
         </th>
       ));
-      headers.push(<th key={"header-delete"}></th>);
+      if (haveDelete) headers.push(<th key={"header-delete"}></th>);
 
       rows = Object.values(tableData).map((entry, rowIndex) => {
         const rowData = headerNames.map((headerName, colIndex) => (
           <td key={`entry-${rowIndex}-${colIndex}`}>{entry[headerName]}</td>
         ));
-        
+
         //only render delete button if haveDelete is true
         if (haveDelete) {
           rowData.push(
@@ -50,8 +50,6 @@ export function GymTable({
               <TrashFill />
             </td>
           );
-        } else {
-          rowData.push(<td key={`entry-${rowIndex}-delete`}></td>);
         }
         return <tr key={`row-${rowIndex}`}>{rowData}</tr>;
       });
@@ -59,17 +57,20 @@ export function GymTable({
 
     setTableHeaders(headers);
     setTableRows(rows);
-  }, [deleteCallback, tableData]);
+  }, [deleteCallback, haveDelete, tableData]);
 
   return (
     <div className={`gym-table ${className}`}>
-      <table className="table table-dark">
-        <thead>
-          <tr>{tableHeaders}</tr>
-        </thead>
-        <tbody>{tableRows}</tbody>
-      </table>
-      <p>{tableHeaders?.length ? "" : "No matching entries found."}</p>
+      {tableHeaders?.length ? (
+        <table className="table table-dark">
+          <thead>
+            <tr>{tableHeaders}</tr>
+          </thead>
+          <tbody>{tableRows}</tbody>
+        </table>
+      ) : (
+        <p>No matching entries found.</p>
+      )}
     </div>
   );
 }
