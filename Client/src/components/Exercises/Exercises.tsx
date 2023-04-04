@@ -5,8 +5,8 @@ import { GymTable } from "../common/GymTable";
 import { GymDropdown } from "../common/GymDropdown";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
-import { deleteExercise, getExercises } from "../../util/exerciseAPI";
-
+import { deleteExercise, getExercises, getExercisesThatTargetAll } from "../../util/exerciseAPI";
+import "./Exercises.scss"
 // enum MembershipType {
 //   BASIC = "BASIC",
 //   PRO = "PRO",
@@ -23,8 +23,9 @@ export function Exercises() {
   // No need to change this
   // const [showForm, setShowForm] = useState(false);
   const [tableData, setTableData] = useState<TableEntry[]>([]);
+  const [tableDataExercisesTargetAll, setTableDataExercisesTargetAll] = useState<TableEntry[]>([]);
   const [networkError, setNetworkError] = useState(false);
-
+  const [displayExercisesThatTargetAll, setDisplayExercisesThatTargetAll] = useState(false);
   // [2] Change this to the default { key: value } pairs of your form.
   const defaultValues = useMemo(() => {
     return {
@@ -172,17 +173,33 @@ export function Exercises() {
     return <GymTable tableData={tableData} deleteCallback={deleteCallback} />;
   }, [deleteCallback, networkError, tableData]);
 
+  const handleClick = useCallback(async () => {
+    setDisplayExercisesThatTargetAll(!displayExercisesThatTargetAll)
+    const exercisesThatTargetAllData = await getExercisesThatTargetAll();
+    setTableDataExercisesTargetAll(exercisesThatTargetAllData)
+  }, [displayExercisesThatTargetAll])
+
+  const getExercisesThatTargetAllContent = useMemo(() => {
+    if (networkError) {
+      return (
+        <p className="error flex-1">
+          Network error. Check that server is running.
+        </p>
+      );
+    } else if (tableDataExercisesTargetAll.length === 0) {
+      return <p className="warning flex-1">No matching entries found.</p>;
+    }
+    return <GymTable tableData={tableDataExercisesTargetAll} deleteCallback={deleteCallback} />;
+  }, [deleteCallback, networkError, tableDataExercisesTargetAll])
+
   // Main return statement. Renders your entire component. You don't need to change this.
   return (
-    <>
-      <div
-        // className={`well ${showForm ? "" : "clickable"}`}
-        // onClick={showForm ? undefined : () => setShowForm(true)}
-      >
-        {/* {showForm ? renderForm : <p>Add New Entry</p>} */}
-      </div>
-      {getContent}
-    </>
+    <div className = "exercises-container">
+      <div>{getContent}</div>
+      {!displayExercisesThatTargetAll && <button onClick = {handleClick} className = "btn btn-primary">Show Exercises That Target All</button>}
+      {displayExercisesThatTargetAll && <button onClick = {handleClick} className = "btn btn-danger">Hide Exercises That Target All</button>}
+      {displayExercisesThatTargetAll && getExercisesThatTargetAllContent}
+    </div>
   );
 
 }

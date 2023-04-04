@@ -49,5 +49,33 @@ public class ExerciseRepository : IExerciseRepository
         return nameOfExerciseToDelete;
     }
 
+    public List<Exercise> GetExercisesThatTargetAll () {
+        List<Exercise> exercisesThatTargetAll = new();
+        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        using (SqlConnection connection = new SqlConnection(connectionString)) {
+            connection.Open();
+            string sql = "SELECT * "
+                + " FROM Does_Exercise DE"
+                + " WHERE NOT EXISTS ("
+                + " SELECT bp_Name "
+                + " FROM BodyPart"
+                + " EXCEPT "
+                + " (SELECT T.BodyPart_name "
+                + " FROM Targets T"
+                + " WHERE T.Exercise_Name = DE.Exercise_Name)"
+                + " )";
+            SqlCommand command = new SqlCommand(sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read()) {
+                String exerciseName = reader["Exercise_Name"].ToString();
+                int numberOfSets = Convert.ToInt32(reader["Number_of_sets"].ToString());
+                Exercise exercise = new(exerciseName!, numberOfSets);
+                exercisesThatTargetAll.Add(exercise);
+            }
+            connection.Close();
+        }
+        return exercisesThatTargetAll;
+    }
+
     
 }
