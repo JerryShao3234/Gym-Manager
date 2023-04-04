@@ -51,11 +51,21 @@ export async function createClass(data: TableEntry): Promise<TableEntry[]> {
 export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
   try {
     //the URL parameters can be anything except "null"
-    console.log("Filter: ", optionalFilter)
+    var urlParams = "?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1"
+    if(optionalFilter) {
+      var priceFilter = optionalFilter.price ? optionalFilter.price : "null"
+      var startTimeFilter = optionalFilter.startTime ? optionalFilter.startTime : "null"
+      var endTimeFilter = optionalFilter.endTime ? optionalFilter.endTime : "null"
+      var instructorNameFilter = optionalFilter.instructorName ? optionalFilter.instructorName : "null"
+      var exerciseNameFilter = optionalFilter.exerciseName ? optionalFilter.exerciseName : "null"
+      var nameFilter = optionalFilter.name ? optionalFilter.name : "null"
+      var classIDFilter = optionalFilter.classID ? optionalFilter.classID : "null"
+      urlParams = "?price=" + priceFilter + "&start_time=" + startTimeFilter + "&end_time=" + endTimeFilter + "&instructor_name=" + instructorNameFilter + "&exercise_name=" + exerciseNameFilter + "&name=" + nameFilter + "&class_ID=" + classIDFilter
+    }
     const response = 
-    optionalFilter ? 
-      await axios.get(BASE_URL + "class/get/" + optionalFilter +"?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1")
-      : await axios.get(BASE_URL + "class/get?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1")  ;
+    (optionalFilter) ? 
+      await axios.get(BASE_URL + "class/get/" + optionalFilter.classWithExerciseInput + urlParams)
+      : await axios.get(BASE_URL + "class/get/" + urlParams);
     return unwrapResponse(response);
   } catch (err: any) {
     throw new Error(getErrorMessage(err));
