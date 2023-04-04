@@ -31,9 +31,8 @@ public class ClassController : ControllerBase{
         }
     }
 
-    [HttpGet("get")]
-    public IActionResult Get(string price, string start_time, string end_time, string instructor_name, string exercise_name, string name, string class_ID) {
-        Console.WriteLine("Class get called!");
+    [HttpGet("get/{optionalFilter?}")]
+    public IActionResult Get(string price, string start_time, string end_time, string instructor_name, string exercise_name, string name, string class_ID, String? optionalFilter) {
         //sample request url: http://localhost:5000/class/get?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1
         //get the parameters from the request
         try
@@ -53,7 +52,7 @@ public class ClassController : ControllerBase{
                 req.Add("name");
             if(!class_ID.Equals("null"))
                 req.Add("class_ID");
-            var classes = _classService.Get(req);
+            var classes = _classService.Get(req, optionalFilter);
             return Ok(classes);
         }
         catch (Exception e)

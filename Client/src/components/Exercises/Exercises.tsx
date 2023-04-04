@@ -48,8 +48,6 @@ export function Exercises() {
       try {
         const exercises = await getExercises()
         setTableData(exercises as TableEntry[])
-        console.log("test2")
-
       } catch (err: any) {
         setNetworkError(true);
       }

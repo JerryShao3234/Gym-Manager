@@ -35,22 +35,31 @@ public class ClassRepository : IClassRepository
         }
     }
 
-    public List<Class> Get(List<string> req)
+    public List<Class> Get(List<string> req, Object? optionalFilter)
     {
         //select from class table all the attributes in req
-        Console.WriteLine("Getting class for " + req);
         string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
             //select from class table all the attributes in req
-            string sql = "SELECT ";
-            foreach (string s in req) {
-                sql += s + ", ";
+            string sql; 
+            SqlCommand command;
+            if(optionalFilter != null) {
+                sql = "SELECT C.Name, C.Class_ID, C.Instructor_name, C.Price, "
+                + " C.Start_time, C.End_time, DE.Exercise_Name, DE.Number_of_sets "
+                + " FROM Class C, Does_Exercise DE " 
+                + " WHERE C.Exercise_Name = DE.Exercise_Name AND DE.Exercise_Name = @OptionalFilter";
+                command = new SqlCommand(sql, connection); 
+                command.Parameters.AddWithValue("@OptionalFilter", ((string)optionalFilter).Trim());
+            } else {
+                sql = "SELECT ";
+                foreach (string s in req) {
+                    sql += s + ", ";
+                }
+                sql = sql.Substring(0, sql.Length - 2);
+                sql += " FROM Class";
+                command = new SqlCommand(sql, connection); 
             }
-            sql = sql.Substring(0, sql.Length - 2);
-            sql += " FROM Class";
-            Console.WriteLine(sql);
-            SqlCommand command = new SqlCommand(sql, connection);
             SqlDataReader reader = command.ExecuteReader();
             List<Class> classes = new List<Class>();
             while(reader.Read()) {

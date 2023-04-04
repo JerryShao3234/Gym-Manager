@@ -18,7 +18,6 @@ export async function getUsers(optionalFilter: any): Promise<TableEntry[]> {
   try {
     let response;
     if(optionalFilter) {
-      console.log("Filter: ", optionalFilter)
       response = await axios.get(BASE_URL + "user/" + optionalFilter.membershipType)
     } else {
       response =  await axios.get(BASE_URL + "user/");
@@ -49,10 +48,14 @@ export async function createClass(data: TableEntry): Promise<TableEntry[]> {
   }
 }
 
-export async function getClasses(): Promise<TableEntry[]> {
+export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
   try {
     //the URL parameters can be anything except "null"
-    const response = await axios.get(BASE_URL + "class/get?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1");
+    console.log("Filter: ", optionalFilter)
+    const response = 
+    optionalFilter ? 
+      await axios.get(BASE_URL + "class/get/" + optionalFilter +"?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1")
+      : await axios.get(BASE_URL + "class/get?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1")  ;
     return unwrapResponse(response);
   } catch (err: any) {
     throw new Error(getErrorMessage(err));

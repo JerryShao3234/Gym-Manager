@@ -24,7 +24,7 @@ public class ClassService : IClassService {
         _classRepository.Add(c);
     }
 
-    public List<Domain.Entities.Class> Get(List<string> req) {
-        return _classRepository.Get(req);
+    public List<Domain.Entities.Class> Get(List<string> req, Object? optionalFilter) {
+        return _classRepository.Get(req, optionalFilter);
     }
 }

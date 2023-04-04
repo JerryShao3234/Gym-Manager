@@ -5,6 +5,7 @@ import { GymTable } from "../common/GymTable";
 import { GymDropdown } from "../common/GymDropdown";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
+import { AdvancedClassFilter } from "./AdvancedClassFilter";
 
 interface FormSchema {
     Price: string;
@@ -27,6 +28,7 @@ export function Class() {
     const [showForm, setShowForm] = useState(false);
     const [tableData, setTableData] = useState<TableEntry[]>([]);
     const [networkError, setNetworkError] = useState(false);
+    const [filter, setFilter] = useState<any>("");
 
     /*
         defaultValues stores the default values of the form FormSchema.
@@ -69,14 +71,14 @@ export function Class() {
       }, [networkError, tableData]);
 
     useEffect(() => {
-        getClasses()
+        getClasses(filter)
           .then((classes: TableEntry[]) => {
             setTableData(classes as TableEntry[]);
           })
           .catch(() => {
             setNetworkError(true);
           });
-      }, []);
+      }, [filter]);
 
     /*
         Adds a new class through a POST request. The parameter data is the data from the form.
@@ -85,7 +87,7 @@ export function Class() {
         async (data: FormSchema) => {
             try {
                 await createClass(data);
-                const updatedData = await getClasses();
+                const updatedData = await getClasses(filter);
                 setShowForm(false);
                 setTableData(updatedData);
             } catch (err: any) {
@@ -204,6 +206,7 @@ export function Class() {
                 There should be some SELECT'd data here
             </div>
             {getContent}
+            <AdvancedClassFilter setFilter = {setFilter}></AdvancedClassFilter>
         </>
     );
 
