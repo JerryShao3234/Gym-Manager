@@ -132,7 +132,7 @@ export function Targets() {
                 className={`well ${showForm ? "" : "clickable"}`}
                 onClick={showForm ? undefined : () => setShowForm(true)}
             >
-                {showForm ? renderForm : <p>Select by intensity</p>}
+                {showForm ? renderForm : <p>Select by average intensity</p>}
             </div>
             {getContent}
             <div>

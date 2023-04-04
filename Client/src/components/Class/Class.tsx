@@ -196,14 +196,12 @@ export function Class() {
 
     return (
         <>
-            <div
+            <div 
+                style={{ overflowY: "auto" }}
                 className={`well ${showForm ? "" : "clickable"}`}
                 onClick={showForm ? undefined : () => setShowForm(true)}
             >
                 {showForm ? renderForm : <p>Add New Entry</p>}
-            </div>
-            <div>
-                There should be some SELECT'd data here
             </div>
             {getContent}
             <AdvancedClassFilter setFilter = {setFilter}></AdvancedClassFilter>
