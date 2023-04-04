@@ -196,8 +196,8 @@ export function Exercises() {
   return (
     <div className = "exercises-container">
       <div>{getContent}</div>
-      {!displayExercisesThatTargetAll && <button onClick = {handleClick} className = "btn btn-primary">Show Exercises That Target All</button>}
-      {displayExercisesThatTargetAll && <button onClick = {handleClick} className = "btn btn-danger">Hide Exercises That Target All</button>}
+      {!displayExercisesThatTargetAll && <button onClick = {handleClick} className = "btn btn-primary">Show Exercises That Target Everything</button>}
+      {displayExercisesThatTargetAll && <button onClick = {handleClick} className = "btn btn-danger">Hide Exercises That Target Everything</button>}
       {displayExercisesThatTargetAll && getExercisesThatTargetAllContent}
     </div>
   );
