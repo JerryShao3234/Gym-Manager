@@ -66,7 +66,18 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
     (optionalFilter) ? 
       await axios.get(BASE_URL + "class/get/" + optionalFilter.classWithExerciseInput + urlParams)
       : await axios.get(BASE_URL + "class/get/" + urlParams);
-    return unwrapResponse(response);
+    var res = unwrapResponse(response);
+
+    //filter out the keys that have values of "null"
+    for (var i = 0; i < res.length; i++) {
+      for (var key in res[i]) {
+        if (res[i][key] === "null") {
+          delete res[i][key];
+        }
+      }
+    }
+    
+    return res;
   } catch (err: any) {
     throw new Error(getErrorMessage(err));
   }
