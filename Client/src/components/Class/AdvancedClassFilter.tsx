@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { SemanticClassificationFormat } from 'typescript';
-
+import "./AdvancedClassFilter.scss"
 export interface IAdvancedClassFilterProps {
     setFilter: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -18,10 +18,12 @@ export function AdvancedClassFilter ({setFilter}: IAdvancedClassFilterProps) {
     }, [setFilter, classWithExerciseInput])
 
     return (
-    <div>
+    <div className = "add-class-filter">
         <div className="">Select classes that teach:</div>
-        <input type="text" value={classWithExerciseInput} onChange={handleInputChange} />
-        <button onClick={handleSubmit}>Submit</button>
+        <div className="add-class-filter_input-button-container">
+            <input type="text" value={classWithExerciseInput} onChange={handleInputChange} />
+            <button className = "btn btn-primary" onClick={handleSubmit}>Submit</button>
+        </div>
     </div>
     );
 }
