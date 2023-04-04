@@ -12,12 +12,14 @@ public class UserRepository : IUserRepository
     public UserRepository(IConfiguration config) {
         _config = config;
     }
+
     public void Add(User user)
     {
         Console.WriteLine("Adding user " + user.Email);
 
         string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
-        using (SqlConnection connection = new SqlConnection(connectionString)) {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
             connection.Open();
 
             string sql = "INSERT INTO Users (Name, Email, MembershipType) VALUES (@Name, @Email, @MembershipType)";
@@ -27,6 +29,51 @@ public class UserRepository : IUserRepository
             command.Parameters.AddWithValue("@MembershipType", user.MembershipType);
             command.ExecuteNonQuery();
             connection.Close();
+        }
+    }
+
+    private string joinNonEmpty(List<string> strings)
+    {
+        strings.RemoveAll(s => s == "");
+        return String.Join(",", strings);
+    }
+
+    public int Update(UpdateRequest updateObj)
+    {
+        Console.WriteLine("Updating users... ");
+
+        string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string setString = " SET " + joinNonEmpty(new List<string>()
+            {
+                (updateObj.SetName is null ? "" : "Name = @SetName\n"),
+                (updateObj.SetEmail is null ? "" : "Email = @SetEmail"),
+                (updateObj.SetMembershipType is null ? "" : "MembershipType = @SetMembershipType")
+            });
+            Console.WriteLine(setString);
+            string whereString = " WHERE " + joinNonEmpty(new List<string>(){(updateObj.WhereName is null ? "" : "Name = @WhereName"),
+                                 (updateObj.WhereEmail is null ? "" : ("Email = @WhereEmail")),
+                                 (updateObj.WhereMembershipType is null ? "" : "MembershipType = @WhereMembershipType")});
+            Console.WriteLine(whereString);
+            string sql = "UPDATE Users (Name, Email, MembershipType) " +
+                         setString +
+                         (String.IsNullOrEmpty(whereString) ? "" : whereString);
+            Console.WriteLine(sql);
+            
+            connection.Open();
+            SqlCommand command = new SqlCommand(sql + "; SELECT @@ROWCOUNT;", connection);
+            
+            if (updateObj.SetName is not null) command.Parameters.AddWithValue("@SetName", updateObj.SetName);
+            if (updateObj.SetEmail is not null) command.Parameters.AddWithValue("@SetEmail", updateObj.SetEmail);
+            if (updateObj.SetMembershipType is not null) command.Parameters.AddWithValue("@SetMembershipType", updateObj.SetMembershipType);
+            if (updateObj.WhereName is not null) command.Parameters.AddWithValue("@WhereName", updateObj.WhereName);
+            if (updateObj.WhereEmail is not null) command.Parameters.AddWithValue("@WhereEmail", updateObj.WhereEmail);
+            if (updateObj.WhereMembershipType is not null) command.Parameters.AddWithValue("@WhereMembershipType", updateObj.WhereMembershipType);
+            
+            int updatedRowCount = (int)command.ExecuteScalar();
+            Console.WriteLine("... updated {0} rows.", updatedRowCount);
+            return updatedRowCount;
         }
     }
     public void Delete(User user)

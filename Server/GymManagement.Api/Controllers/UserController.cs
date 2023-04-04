@@ -28,6 +28,19 @@ public class UserController : ControllerBase{
         }
     }
     
+    [HttpPut("update")]
+    public IActionResult Update(UpdateRequest request) {
+        try
+        {
+            var result = _userService.Update(request);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    
     [HttpDelete("delete/{email}")]
     public IActionResult Delete(string email) {
         try

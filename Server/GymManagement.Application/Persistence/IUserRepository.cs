@@ -9,5 +9,7 @@ public interface IUserRepository {
 
     void Delete(User user);
 
+    int Update(UpdateRequest user); // returns # of tuples updated 
+
     Object GetAll(Object? optionalFilter);
 }

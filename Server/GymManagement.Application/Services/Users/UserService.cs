@@ -19,6 +19,16 @@ public class UserService : IUserService {
         _userRepository.Add(user);
         return _userRepository.GetAll(null);
     }
+
+    public Object Update(UpdateRequest updateObj)
+    {
+        if (updateObj.SetEmail is null && updateObj.SetMembershipType is null && updateObj.SetName is null)
+        {
+            throw new Exception("Unable to update. At least 1 set clause must be non-empty.");
+        }
+
+        return _userRepository.Update(updateObj);
+    }
     
     public Object Delete(string email)
     {
