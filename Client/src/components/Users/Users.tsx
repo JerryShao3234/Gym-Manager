@@ -25,7 +25,7 @@ export function Users() {
   const [showForm, setShowForm] = useState(false);
   const [tableData, setTableData] = useState<TableEntry[]>([]);
   const [networkError, setNetworkError] = useState(false);
-  const [filter, setFilter]= useState<any>(null); // type is any incase we want to add future filters
+  const [filter, setFilter] = useState<any>(null); // type is any incase we want to add future filters
   const [memberCount, setMemberCount] = useState(0);
   // [2] Change this to the default { key: value } pairs of your form.
   const defaultValues = useMemo(() => {
@@ -48,36 +48,27 @@ export function Users() {
 
   // [3] Change getUsers() to whatever your axios GET route is
 
-  const initMemberCount = useCallback(
-    (memberCountInfo: any) => {
-      let numbMembers = 0;
-      for(let memberCount of memberCountInfo) {
-        numbMembers += memberCount.numMembers
-      }
-      setMemberCount(numbMembers);
+  const initMemberCount = useCallback((memberCountInfo: any) => {
+    let numbMembers = 0;
+    for (let memberCount of memberCountInfo) {
+      numbMembers += memberCount.numMembers;
+    }
+    setMemberCount(numbMembers);
+  }, []);
 
-    }, 
-    []
-  )
-
-  const initTable = useCallback(
-    async() => {
-      try {
-        const response = await getUsers(filter)
-        setTableData(response.users as TableEntry[])
-        initMemberCount(response.countInfo)
-      } catch (err: any) {
-        setNetworkError(true);
-      }
-    },
-    [filter, initMemberCount]
-  )
+  const initTable = useCallback(async () => {
+    try {
+      const response = await getUsers(filter);
+      setTableData(response.users as TableEntry[]);
+      initMemberCount(response.countInfo);
+    } catch (err: any) {
+      setNetworkError(true);
+    }
+  }, [filter, initMemberCount]);
 
   useEffect(() => {
-    initTable()
+    initTable();
   }, [filter, initTable]);
-
-  
 
   // [4] Change this to call your POST endpoint.
   const onSubmit = useCallback(
@@ -85,7 +76,7 @@ export function Users() {
       try {
         await createUser(data);
         reset(defaultValues);
-        initTable()
+        initTable();
         alert("Successfully added user with email " + data.email);
       } catch (err: any) {
         alert(err.message);
@@ -160,15 +151,18 @@ export function Users() {
   ]);
 
   // [6] Make this call your delete function.
-  const deleteCallback = useCallback(async (entry: TableEntry) => {
-    try {
-      await deleteUser(entry["email"]);
-      alert("Successfully deleted entry with email " + entry["email"]);
-      initTable()
-    } catch (err: any) {
-      alert(err.message);
-    }
-  }, [initTable]);
+  const deleteCallback = useCallback(
+    async (entry: TableEntry) => {
+      try {
+        await deleteUser(entry["email"]);
+        alert("Successfully deleted entry with email " + entry["email"]);
+        initTable();
+      } catch (err: any) {
+        alert(err.message);
+      }
+    },
+    [initTable]
+  );
 
   // Shows either the table or a network error message. No need to change.
   const getContent = useMemo(() => {
@@ -188,14 +182,18 @@ export function Users() {
   return (
     <>
       <div
-        className={`well ${showForm ? "" : "clickable"}`}
+        className={`well ${showForm ? "collapsed" : "clickable"}`}
         onClick={showForm ? undefined : () => setShowForm(true)}
       >
         {showForm ? renderForm : <p>Add New Entry</p>}
       </div>
-      {getContent}
-      <AdvancedUserFilter setFilter = {setFilter} />
-      <AdvancedUserCount memberCount = {memberCount} /> 
+      <div className="gym-row">
+        {getContent}
+        <div className="additional-content">
+          <AdvancedUserFilter setFilter={setFilter} />
+          <AdvancedUserCount memberCount={memberCount} />
+        </div>
+      </div>
     </>
   );
 }

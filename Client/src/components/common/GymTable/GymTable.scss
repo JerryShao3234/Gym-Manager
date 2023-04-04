@@ -1,16 +1,20 @@
 .gym-table {
   height: 100%;
-  overflow: clip;
+  width: 100%;
+  overflow: hidden;
   flex: 1;
+  display: flex;
+  justify-content: center;
 
   table {
     display: block;
-    overflow-y: auto;
-    height: 100%;
+    overflow: auto;
+    width: fit-content;
 
     thead {
       position: sticky;
       top: 0;
+      width: 100%;
     }
 
     tr:hover td {
