@@ -51,7 +51,6 @@ export function Users() {
   const initMemberCount = useCallback(
     (memberCountInfo: any) => {
       let numbMembers = 0;
-      console.log(memberCountInfo)
       for(let memberCount of memberCountInfo) {
         numbMembers += memberCount.numMembers
       }
@@ -65,7 +64,6 @@ export function Users() {
     async() => {
       try {
         const response = await getUsers(filter)
-        console.log('Filter is: ', filter)
         setTableData(response.users as TableEntry[])
         initMemberCount(response.countInfo)
       } catch (err: any) {
@@ -160,9 +158,6 @@ export function Users() {
     onSubmit,
     renderFormButtons,
   ]);
-  useEffect(() => {
-    console.log("Filter changed: ", filter)
-  },[filter])
 
   // [6] Make this call your delete function.
   const deleteCallback = useCallback(async (entry: TableEntry) => {

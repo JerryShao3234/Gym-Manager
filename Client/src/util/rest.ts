@@ -39,7 +39,6 @@ export async function deleteUser(email: string): Promise<any> {
 
 export async function createClass(data: TableEntry): Promise<TableEntry[]> {
   try {
-    console.log(data)
     const response = await axios.post(BASE_URL + "class/add/", data);
     return unwrapResponse(response) as TableEntry[];
   } catch (err: any) {
