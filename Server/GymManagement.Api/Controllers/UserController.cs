@@ -43,7 +43,7 @@ public class UserController : ControllerBase{
 
     [HttpGet("{optionalFilter?}")]
     public OkObjectResult GetAll(String? optionalFilter) {
-        List<User> response; 
+        Object response; 
         response = _userService.GetAll(optionalFilter);
         return Ok(response); 
     }

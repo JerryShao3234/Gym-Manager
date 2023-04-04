@@ -9,7 +9,7 @@ public class UserService : IUserService {
     public UserService(IUserRepository userRepository) {
         _userRepository = userRepository;
     }
-    public List<User> Register(string name, string email, string membershipType){
+    public Object Register(string name, string email, string membershipType){
         // Make sure user does not exist 
         if(_userRepository.GetUserByEmail(email) is not null) {
             throw new Exception("User with given email already exists");
@@ -20,7 +20,7 @@ public class UserService : IUserService {
         return _userRepository.GetAll(null);
     }
     
-    public List<User> Delete(string email)
+    public Object Delete(string email)
     {
         var user = _userRepository.GetUserByEmail(email);
         
@@ -32,7 +32,7 @@ public class UserService : IUserService {
         return _userRepository.GetAll(null);
     }
 
-    public List<User> GetAll(Object? optionalFilter) {
+    public Object GetAll(Object? optionalFilter) {
         return _userRepository.GetAll(optionalFilter);
     }
 }

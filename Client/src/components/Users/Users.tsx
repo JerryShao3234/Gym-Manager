@@ -6,6 +6,7 @@ import { GymDropdown } from "../common/GymDropdown";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
 import { AdvancedUserFilter } from "./AdvancedUserFilter";
+import { AdvancedUserCount } from "./AdvancedUserCount";
 
 export enum MembershipType {
   BASIC = "BASIC",
@@ -25,7 +26,7 @@ export function Users() {
   const [tableData, setTableData] = useState<TableEntry[]>([]);
   const [networkError, setNetworkError] = useState(false);
   const [filter, setFilter]= useState<any>(null); // type is any incase we want to add future filters
-
+  const [memberCount, setMemberCount] = useState(0);
   // [2] Change this to the default { key: value } pairs of your form.
   const defaultValues = useMemo(() => {
     return {
@@ -46,29 +47,53 @@ export function Users() {
   });
 
   // [3] Change getUsers() to whatever your axios GET route is
-  useEffect(() => {
-    getUsers(filter)
-      .then((users: TableEntry[]) => {
-        setTableData(users as TableEntry[]);
-      })
-      .catch(() => {
+
+  const initMemberCount = useCallback(
+    (memberCountInfo: any) => {
+      let numbMembers = 0;
+      console.log(memberCountInfo)
+      for(let memberCount of memberCountInfo) {
+        numbMembers += memberCount.numMembers
+      }
+      setMemberCount(numbMembers);
+
+    }, 
+    []
+  )
+
+  const initTable = useCallback(
+    async() => {
+      try {
+        const response = await getUsers(filter)
+        console.log('Filter is: ', filter)
+        setTableData(response.users as TableEntry[])
+        initMemberCount(response.countInfo)
+      } catch (err: any) {
         setNetworkError(true);
-      });
-  }, [filter]);
+      }
+    },
+    [filter, initMemberCount]
+  )
+
+  useEffect(() => {
+    initTable()
+  }, [filter, initTable]);
+
+  
 
   // [4] Change this to call your POST endpoint.
   const onSubmit = useCallback(
     async (data: FormSchema) => {
       try {
-        const updatedData = await createUser(data);
+        await createUser(data);
         reset(defaultValues);
-        setTableData(updatedData);
+        initTable()
         alert("Successfully added user with email " + data.email);
       } catch (err: any) {
         alert(err.message);
       }
     },
-    [defaultValues, reset]
+    [defaultValues, reset, initTable]
   );
 
   // Form error callback. Technically we don't need this, but I'll leave it here
@@ -135,17 +160,20 @@ export function Users() {
     onSubmit,
     renderFormButtons,
   ]);
+  useEffect(() => {
+    console.log("Filter changed: ", filter)
+  },[filter])
 
   // [6] Make this call your delete function.
   const deleteCallback = useCallback(async (entry: TableEntry) => {
     try {
-      const response = await deleteUser(entry["email"]);
+      await deleteUser(entry["email"]);
       alert("Successfully deleted entry with email " + entry["email"]);
-      setTableData(response);
+      initTable()
     } catch (err: any) {
       alert(err.message);
     }
-  }, []);
+  }, [initTable]);
 
   // Shows either the table or a network error message. No need to change.
   const getContent = useMemo(() => {
@@ -172,6 +200,7 @@ export function Users() {
       </div>
       {getContent}
       <AdvancedUserFilter setFilter = {setFilter} />
+      <AdvancedUserCount memberCount = {memberCount} /> 
     </>
   );
 }

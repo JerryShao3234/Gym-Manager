@@ -5,16 +5,16 @@ export const BASE_URL = "http://localhost:5210/";
 export type TableEntry = { [key: string]: any };
 
 // ===[ USER ]==========================================================================================================
-export async function createUser(data: TableEntry): Promise<TableEntry[]> {
+export async function createUser(data: TableEntry): Promise<any> {
   try {
     const response = await axios.post(BASE_URL + "user/register", data);
-    return unwrapResponse(response) as TableEntry[];
+    return unwrapResponse(response);
   } catch (err: any) {
     throw new Error(getErrorMessage(err));
   }
 }
 
-export async function getUsers(optionalFilter: any): Promise<TableEntry[]> {
+export async function getUsers(optionalFilter: any): Promise<any> {
   try {
     let response;
     if(optionalFilter) {
@@ -28,7 +28,7 @@ export async function getUsers(optionalFilter: any): Promise<TableEntry[]> {
   }
 }
 
-export async function deleteUser(email: string): Promise<TableEntry[]> {
+export async function deleteUser(email: string): Promise<any> {
   try {
     const response = await axios.delete(BASE_URL + "user/delete/" + email);
     return unwrapResponse(response);

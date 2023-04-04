@@ -66,8 +66,14 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    public List<User> GetAll (Object? optionalFilter) {
+
+   
+    public Object GetAll (Object? optionalFilter) {
         List<User> _users = new List<User>();
+        var response = new{
+            users = _users,
+            countInfo =  new List<object>()
+        };
         string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString)) {
             connection.Open();
@@ -85,11 +91,41 @@ public class UserRepository : IUserRepository
             while (reader.Read()) {
                 var user = new User{Name = reader["Name"].ToString() ?? "", Email = reader["Email"].ToString() ?? "", MembershipType = reader["MembershipType"].ToString() ?? ""};
                 _users.Add(user);
+            } 
+            reader.Close();
+
+            string sql2;
+            string membershipType;
+            SqlCommand getCountCommand;
+            if(optionalFilter == null) {
+                sql2 =  "SELECT MembershipType, COUNT(*) as NumberOfMembers "
+                + "FROM Users "
+                + "GROUP BY MembershipType "
+                + "HAVING MembershipType LIKE '%'";
+                getCountCommand = new SqlCommand(sql2, connection); 
+
+            } else {
+                sql2 = "SELECT MembershipType, COUNT(*) as NumberOfMembers "
+                + "FROM Users "
+                + "GROUP BY MembershipType "
+                + "HAVING MembershipType = @MembershipType";
+                membershipType = ((string)optionalFilter).Trim() == "PRO" ? "Pro" : "Basic";
+                getCountCommand = new SqlCommand(sql2, connection); 
+                getCountCommand.Parameters.AddWithValue("@MembershipType", membershipType);
             }
-            
+
+           
+            SqlDataReader reader2 = getCountCommand.ExecuteReader();
+            while (reader2.Read()) {
+                var oneRow = new {
+                    type= reader2["MembershipType"],
+                    numMembers = reader2["NumberOfMembers"]
+                };
+                response.countInfo.Add(oneRow);
+            } 
             connection.Close();
         }
 
-        return _users;
+        return response;
     }
 }

@@ -9,5 +9,5 @@ public interface IUserRepository {
 
     void Delete(User user);
 
-    List<User> GetAll(Object? optionalFilter);
+    Object GetAll(Object? optionalFilter);
 }

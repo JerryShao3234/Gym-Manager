@@ -65,7 +65,6 @@ export function Exercises() {
     //     setNetworkError(true);
     //   });
     initTable()
-    console.log("test")
   }, [initTable]);
 
 //   // [4] Change this to call your POST endpoint.
