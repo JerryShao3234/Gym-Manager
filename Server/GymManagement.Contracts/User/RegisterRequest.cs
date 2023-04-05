@@ -6,3 +6,12 @@ public record RegisterRequest(
     string Email,
     string MembershipType
 );
+
+public record UpdateRequestRecord(
+    string setName,
+    string setEmail,
+    string setMembershipType,
+    string whereName,
+    string whereEmail,
+    string whereMembershipType
+);

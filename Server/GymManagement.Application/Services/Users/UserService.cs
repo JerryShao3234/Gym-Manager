@@ -22,9 +22,9 @@ public class UserService : IUserService {
 
     public Object Update(UpdateRequest updateObj)
     {
-        if (updateObj.SetEmail is null && updateObj.SetMembershipType is null && updateObj.SetName is null)
+        if (String.IsNullOrEmpty(updateObj.SetEmail) && String.IsNullOrEmpty(updateObj.SetName) && String.IsNullOrEmpty(updateObj.SetMembershipType))
         {
-            throw new Exception("Unable to update. At least 1 set clause must be non-empty.");
+            throw new Exception("Unable to update. At least 1 'change to' field must be non-empty.");
         }
 
         return _userRepository.Update(updateObj);
