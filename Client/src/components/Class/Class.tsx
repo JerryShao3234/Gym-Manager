@@ -101,7 +101,7 @@ export function Class() {
     );
   }, [networkError, tableData]);
 
-  useEffect(() => {
+  const loadClasses = useCallback(() => {
     getClasses(filter)
       .then((classes: TableEntry[]) => {
         setTableData(classes as TableEntry[]);
@@ -110,6 +110,10 @@ export function Class() {
         setNetworkError(true);
       });
   }, [filter]);
+
+  useEffect(() => {
+    loadClasses();
+  }, [filter, loadClasses]);
 
   /*
           Adds a new class through a POST request. The parameter data is the data from the form.
@@ -167,13 +171,22 @@ export function Class() {
   const renderFormButtons = useMemo(() => {
     return (
       <div className="input-group justify-content-between">
-        <Button
-          type="button"
-          className="cancel btn-dark rounded-1"
-          onClick={() => setViewingInsights(!viewingInsights)}
-        >
-          Switch to {viewingInsights ? "Create" : "Insights"} Mode
-        </Button>
+        <span>
+          <Button
+            type="button"
+            className="cancel btn-dark rounded-1"
+            onClick={() => loadClasses()}
+          >
+            Refresh
+          </Button>
+          <Button
+            type="button"
+            className="cancel btn-dark rounded-1"
+            onClick={() => setViewingInsights(!viewingInsights)}
+          >
+            Switch to {viewingInsights ? "Create" : "Insights"} Mode
+          </Button>
+        </span>
         <span>
           <Button type="submit" className="submit">
             Submit
@@ -190,7 +203,7 @@ export function Class() {
         </span>
       </div>
     );
-  }, [defaultValues, reset, viewingInsights]);
+  }, [defaultValues, loadClasses, reset, viewingInsights]);
 
   useEffect(() => {
     getAllExercises().then((exercises) => {
