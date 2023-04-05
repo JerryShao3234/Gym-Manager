@@ -26,8 +26,8 @@ public class ClassRepository : IClassRepository
             command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar).Value = c.Name;
             command.Parameters.Add("@Class_ID", System.Data.SqlDbType.VarChar).Value = c.Class_ID;
             command.Parameters.Add("@Price", System.Data.SqlDbType.Int).Value = c.Price;
-            command.Parameters.Add("@Start_time", System.Data.SqlDbType.DateTime).Value = DateTime.ParseExact(c.Start_time, "yyyy-MM-dd HH:mm:ss", null);
-            command.Parameters.Add("@End_time", System.Data.SqlDbType.DateTime).Value = DateTime.ParseExact(c.End_time, "yyyy-MM-dd HH:mm:ss", null);
+            command.Parameters.Add("@Start_time", System.Data.SqlDbType.Time).Value = TimeSpan.Parse(c.Start_time);
+            command.Parameters.Add("@End_time", System.Data.SqlDbType.Time).Value = TimeSpan.Parse(c.Start_time);
             command.Parameters.Add("@Instructor_name", System.Data.SqlDbType.VarChar).Value = c.Instructor_name;
             command.Parameters.Add("@Exercise_Name", System.Data.SqlDbType.VarChar).Value = c.Exercise_Name;
             command.ExecuteNonQuery();

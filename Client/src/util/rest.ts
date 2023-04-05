@@ -133,6 +133,19 @@ export async function getExercisesWithIntensity(
   }
 }
 
+export async function getAllExercises() {
+  return getExercisesWithIntensity("0").then((classes: TableEntry[]) => {
+    let temp: TableEntry[] = [];
+    for (let i = 0; i < classes.length; i++) {
+      let entry: TableEntry = {
+        Exercise: classes[i],
+      };
+      temp.push(entry);
+    }
+    return temp;
+  });
+}
+
 // ===[ EQUIPMENT ]=====================================================================================================
 // TODO
 
@@ -145,5 +158,5 @@ export function unwrapResponse(request: AxiosResponse) {
 }
 
 export function getErrorMessage(err: AxiosError) {
-  return err.message + "\n\n" + err.response?.data;
+    return err.message + "\n\n" + err.response?.data;
 }
