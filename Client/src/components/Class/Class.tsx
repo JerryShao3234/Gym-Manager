@@ -4,6 +4,7 @@ import {
   createClass,
   getAllExercises,
   getClasses,
+  getMinPriceGivenPopularity,
   TableEntry,
 } from "../../util/rest";
 import { GymTable } from "../common/GymTable";
@@ -35,6 +36,9 @@ export function Class() {
   const [networkError, setNetworkError] = useState(false);
   const [filter, setFilter] = useState<any>("");
   const [allExercise, setAllExercises] = useState<string[]>([]);
+  const [viewingInsights, setViewingInsights] = useState(false);
+  const [popularity, setPopularity] = useState("");
+  const [minPrice, setMinPrice] = useState(-1);
 
   /*
         defaultValues stores the default values of the form FormSchema.
@@ -51,6 +55,10 @@ export function Class() {
     };
   }, []);
 
+  const insightDefaultValues = useMemo(() => {
+    return { instructorPopularity: "" };
+  }, []);
+
   // Form setup. No need to change.
   const {
     reset,
@@ -59,6 +67,16 @@ export function Class() {
     formState: { errors },
   } = useForm({
     defaultValues: defaultValues,
+  });
+
+  // Form setup. No need to change.
+  const {
+    reset: insightReset,
+    handleSubmit: insightHandleSubmit,
+    control: insightControl,
+    formState: { errors: insightErrors },
+  } = useForm({
+    defaultValues: insightDefaultValues,
   });
 
   const getContent = useMemo(() => {
@@ -102,12 +120,36 @@ export function Class() {
         const updatedData = await getClasses(filter);
         setShowForm(false);
         setTableData(updatedData);
+        reset(defaultValues);
         alert("Added new entry with class ID " + data.Class_ID);
       } catch (err: any) {
         alert(err.message);
       }
     },
-    [filter]
+    [defaultValues, filter, reset]
+  );
+
+  const insightOnSubmit = useCallback(
+    async (data: { instructorPopularity: string }) => {
+      try {
+        const minPrice = await getMinPriceGivenPopularity(
+          data.instructorPopularity
+        );
+
+        alert(
+          "The cheapest class for an instructor with popularity " +
+            data.instructorPopularity +
+            " is $" +
+            minPrice
+        );
+        setMinPrice(minPrice);
+        setPopularity(data.instructorPopularity);
+        insightReset(insightDefaultValues);
+      } catch (err: any) {
+        alert(err.message);
+      }
+    },
+    [insightDefaultValues, insightReset]
   );
 
   const onError = useCallback(async () => {
@@ -116,22 +158,31 @@ export function Class() {
 
   const renderFormButtons = useMemo(() => {
     return (
-      <div className="input-group justify-content-end">
+      <div className="input-group justify-content-between">
         <Button
-          variant="secondary"
-          onClick={() => {
-            reset(defaultValues);
-            setShowForm(false);
-          }}
+          type="button"
+          className="cancel btn-dark rounded-1"
+          onClick={() => setViewingInsights(!viewingInsights)}
         >
-          Cancel
+          Switch to {viewingInsights ? "Create" : "Insights"} Mode
         </Button>
-        <Button type="submit" className="submit">
-          Submit
-        </Button>
+        <span>
+          <Button type="submit" className="submit">
+            Submit
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              reset(defaultValues);
+              setShowForm(false);
+            }}
+          >
+            Cancel
+          </Button>
+        </span>
       </div>
     );
-  }, [defaultValues, reset]);
+  }, [defaultValues, reset, viewingInsights]);
 
   useEffect(() => {
     getAllExercises().then((exercises) => {
@@ -140,6 +191,32 @@ export function Class() {
   }, []);
 
   const renderForm = useMemo(() => {
+    if (viewingInsights) {
+      return (
+        <form onSubmit={insightHandleSubmit(insightOnSubmit, onError)}>
+          <h2>Class Cost Estimator</h2>
+          <GymDropdown
+            items={["", "1", "2", "3"]}
+            control={insightControl}
+            label="Instructor popularity rating"
+            formFieldName={"instructorPopularity"}
+            rules={{ required: true }}
+            inputError={insightErrors.instructorPopularity}
+          />
+          {popularity && minPrice > -1 && (
+            <p>
+              The cheapest class offered by instructors with popularity{" "}
+              <code>{popularity}</code> is <code>${minPrice}</code>
+            </p>
+          )}
+          <p>
+            Note: popularity is counted by the amount of classes that an
+            instructor teaches.
+          </p>
+          {renderFormButtons}
+        </form>
+      );
+    }
     return (
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <GymInput
@@ -218,9 +295,16 @@ export function Class() {
     errors.Price,
     errors.Start_time,
     handleSubmit,
+    insightControl,
+    insightErrors.instructorPopularity,
+    insightHandleSubmit,
+    insightOnSubmit,
+    minPrice,
     onError,
     onSubmit,
+    popularity,
     renderFormButtons,
+    viewingInsights,
   ]);
 
   return (
@@ -229,7 +313,7 @@ export function Class() {
         className={`well ${showForm ? "" : "clickable"}`}
         onClick={showForm ? undefined : () => setShowForm(true)}
       >
-        {showForm ? renderForm : <p>Add New Entry</p>}
+        {showForm ? renderForm : <p>Add New Entry / View Insights</p>}
       </div>
       <div className="gym-row">
         {getContent}

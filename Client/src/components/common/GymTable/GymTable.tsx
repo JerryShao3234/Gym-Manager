@@ -29,7 +29,7 @@ export function GymTable({
       const headerNames = Object.keys(tableData[0]);
       headers = headerNames.map((headerName) => (
         <th scope="col" key={headerName}>
-          {headerName}
+          {headerName + (headerName === "price" ? "($)" : "")}
         </th>
       ));
       if (haveDelete) headers.push(<th key={"header-delete"}></th>);

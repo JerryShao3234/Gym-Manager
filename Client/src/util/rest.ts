@@ -48,6 +48,8 @@ export async function deleteUser(email: string): Promise<any> {
   }
 }
 
+// ===[ CLASS ]=========================================================================================================
+
 export async function createClass(data: TableEntry): Promise<TableEntry[]> {
   try {
     const response = await axios.post(BASE_URL + "class/add/", data);
@@ -61,24 +63,24 @@ export async function createClass(data: TableEntry): Promise<TableEntry[]> {
 export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
   try {
     //the URL parameters can be anything except "null"
-    var urlParams =
+    let urlParams =
       "?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1";
     if (optionalFilter) {
-      var priceFilter = optionalFilter.price ? optionalFilter.price : "null";
-      var startTimeFilter = optionalFilter.startTime
+      const priceFilter = optionalFilter.price ? optionalFilter.price : "null";
+      const startTimeFilter = optionalFilter.startTime
         ? optionalFilter.startTime
         : "null";
-      var endTimeFilter = optionalFilter.endTime
+      const endTimeFilter = optionalFilter.endTime
         ? optionalFilter.endTime
         : "null";
-      var instructorNameFilter = optionalFilter.instructorName
+      const instructorNameFilter = optionalFilter.instructorName
         ? optionalFilter.instructorName
         : "null";
-      var exerciseNameFilter = optionalFilter.exerciseName
+      const exerciseNameFilter = optionalFilter.exerciseName
         ? optionalFilter.exerciseName
         : "null";
-      var nameFilter = optionalFilter.name ? optionalFilter.name : "null";
-      var classIDFilter = optionalFilter.classID
+      const nameFilter = optionalFilter.name ? optionalFilter.name : "null";
+      const classIDFilter = optionalFilter.classID
         ? optionalFilter.classID
         : "null";
       urlParams =
@@ -105,11 +107,11 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
             urlParams
         )
       : await axios.get(BASE_URL + "class/get/" + urlParams);
-    var res = unwrapResponse(response);
+    const res = unwrapResponse(response);
 
     //filter out the keys that have values of "null"
-    for (var i = 0; i < res.length; i++) {
-      for (var key in res[i]) {
+    for (let i = 0; i < res.length; i++) {
+      for (const key in res[i]) {
         if (res[i][key] === "null") {
           delete res[i][key];
         }
@@ -121,6 +123,19 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
     throw new Error(getErrorMessage(err));
   }
 }
+
+export async function getMinPriceGivenPopularity(
+  popularity: string
+): Promise<number> {
+  try {
+    const response = await axios.get(BASE_URL + "class/minPrice/" + popularity);
+    return unwrapResponse(response);
+  } catch (err: any) {
+    throw new Error(getErrorMessage(err));
+  }
+}
+
+// ===[ EXERCISES ]=====================================================================================================
 
 export async function getExercisesWithIntensity(
   intensity: string
@@ -146,17 +161,11 @@ export async function getAllExercises() {
   });
 }
 
-// ===[ EQUIPMENT ]=====================================================================================================
-// TODO
-
-// ===[ BODY PART & EXERCISE ]==========================================================================================
-// TODO
-
 // ===[ HELPER FNS ]====================================================================================================
 export function unwrapResponse(request: AxiosResponse) {
   return request.data;
 }
 
 export function getErrorMessage(err: AxiosError) {
-    return err.message + "\n\n" + err.response?.data;
+  return err.message + "\n\n" + err.response?.data;
 }

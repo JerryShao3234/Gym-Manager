@@ -27,4 +27,9 @@ public class ClassService : IClassService {
     public List<Domain.Entities.Class> Get(List<string> req, Object? optionalFilter) {
         return _classRepository.Get(req, optionalFilter);
     }
+
+    public int GetMinPrice(string popularity)
+    {
+        return _classRepository.GetMinPrice(popularity);
+    }
 }

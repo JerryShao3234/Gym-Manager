@@ -109,6 +109,7 @@ export function Targets() {
           formFieldName={"intensity"}
           rules={{ required: true }}
           inputError={errors.intensity}
+          inputType={"numerical"}
         />
         {renderFormButtons}
       </form>
