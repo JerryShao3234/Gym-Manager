@@ -177,6 +177,7 @@ export function Users() {
           formFieldName={"email"}
           rules={{ required: true }}
           inputError={addErrors.email}
+          inputType={"email"}
         />
         <GymInput
           label="Name"
@@ -223,6 +224,7 @@ export function Users() {
           formFieldName={"whereEmail"}
           rules={{ required: false }}
           inputError={updateErrors.whereEmail}
+          inputType={"email"}
         />
         <GymInput
           label="Email to change to"
@@ -230,6 +232,7 @@ export function Users() {
           formFieldName={"setEmail"}
           rules={{ required: false }}
           inputError={updateErrors.setEmail}
+          inputType={"email"}
         />
         <GymDropdown
           control={updateControl}
