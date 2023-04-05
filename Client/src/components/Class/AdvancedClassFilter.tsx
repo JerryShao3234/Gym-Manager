@@ -70,29 +70,6 @@ export function AdvancedClassFilter({
     classWithExerciseInput,
   ]);
 
-  const handleSubmit = useCallback(() => {
-    setFilter({
-      name: nameChecked,
-      price: priceChecked,
-      startTime: startTimeChecked,
-      endTime: endTimeChecked,
-      instructorName: instructorNameChecked,
-      classID: classID,
-      exerciseName: exerciseNameChecked,
-      classWithExerciseInput: classWithExerciseInput,
-    });
-  }, [
-    classWithExerciseInput,
-    setFilter,
-    nameChecked,
-    priceChecked,
-    startTimeChecked,
-    endTimeChecked,
-    instructorNameChecked,
-    classID,
-    exerciseNameChecked,
-  ]);
-
   return (
     <div className={`add-class-filter ${className}`}>
       <div className="">Select classes that teach:</div>
@@ -102,9 +79,9 @@ export function AdvancedClassFilter({
           value={classWithExerciseInput}
           onChange={handleInputChange}
         />
-        <button className="btn btn-primary" onClick={handleSubmit}>
+        {/* <button className="btn btn-primary" onClick={handleSubmit}>
           Submit
-        </button>
+        </button> */}
       </div>
       <div className="check-box-container">
         <label>
