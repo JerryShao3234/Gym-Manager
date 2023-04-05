@@ -61,4 +61,11 @@ public class ClassController : ControllerBase{
             return BadRequest(e.Message);
         }
     }
+    
+    [HttpGet("minPrice/{instructorPopularity}")]
+    public IActionResult GetMinPrice(String instructorPopularity)
+    {
+        int response = _classService.GetMinPrice(instructorPopularity);
+        return Ok(response);
+    }
 }
