@@ -39,10 +39,11 @@ export function Class() {
   const [viewingInsights, setViewingInsights] = useState(false);
   const [popularity, setPopularity] = useState("");
   const [minPrice, setMinPrice] = useState(-1);
+  const [hasFKError, setHasFKError] = useState(false);
 
   /*
-        defaultValues stores the default values of the form FormSchema.
-    */
+          defaultValues stores the default values of the form FormSchema.
+      */
   const defaultValues = useMemo(() => {
     return {
       Price: "",
@@ -51,7 +52,7 @@ export function Class() {
       End_time: "",
       Class_ID: "",
       Instructor_name: "",
-      Exercise_name: "Bench Press",
+      Exercise_name: "",
     };
   }, []);
 
@@ -111,22 +112,29 @@ export function Class() {
   }, [filter]);
 
   /*
-        Adds a new class through a POST request. The parameter data is the data from the form.
-    */
+          Adds a new class through a POST request. The parameter data is the data from the form.
+      */
   const onSubmit = useCallback(
     async (data: FormSchema) => {
       try {
         await createClass(data);
         const updatedData = await getClasses(filter);
         setShowForm(false);
+        setHasFKError(false);
         setTableData(updatedData);
         reset(defaultValues);
         alert("Added new entry with class ID " + data.Class_ID);
       } catch (err: any) {
-        alert(err.message);
+        if (err.message && err.message.includes("FOREIGN KEY")) {
+          alert(`The exercise ${
+            data.Exercise_name
+          } is invalid, please ensure that exercise is one of 
+            ${allExercise.join(", ")}.`);
+          setHasFKError(true);
+        } else alert(err.message);
       }
     },
-    [defaultValues, filter, reset]
+    [allExercise, defaultValues, filter, reset]
   );
 
   const insightOnSubmit = useCallback(
@@ -273,14 +281,16 @@ export function Class() {
           inputError={errors.Instructor_name}
         />
 
-        <GymDropdown
+        <GymInput
           label="Exercise_name"
           control={control}
           formFieldName={"Exercise_name"}
           rules={{ required: true }}
-          inputError={errors.Exercise_name}
-          items={allExercise}
+          inputError={errors.Exercise_name || hasFKError}
         />
+        <p>
+          Valid exercises are <code>{allExercise.join(", ")}</code>
+        </p>
         {renderFormButtons}
       </form>
     );
@@ -295,6 +305,7 @@ export function Class() {
     errors.Price,
     errors.Start_time,
     handleSubmit,
+    hasFKError,
     insightControl,
     insightErrors.instructorPopularity,
     insightHandleSubmit,
