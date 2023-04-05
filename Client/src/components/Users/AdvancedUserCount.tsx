@@ -1,13 +1,20 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 
 export interface IAdvancedUserCountProps {
-  memberCount: Number
+  memberCountInfo: any
 }
 
-export function AdvancedUserCount ({memberCount}: IAdvancedUserCountProps) {
+export function AdvancedUserCount ({memberCountInfo}: IAdvancedUserCountProps) {
+
     return (
       <div>
-        Number of members: {memberCount.toString()}
+        {memberCountInfo.length === 2 ? (
+          `Number of ${memberCountInfo[0].type} and ${memberCountInfo[1].type} memberships: ${memberCountInfo[0].numMembers + memberCountInfo[1].numMembers}`  
+        ) : (
+          `Number of ${memberCountInfo[0].type} memberships: ${memberCountInfo[0].numMembers}`  
+        )}  
+        {/* {memberCountInfoNumber of members {memberCountInfo}: {memberCount.toString()}} */}
       </div>
     );
 }

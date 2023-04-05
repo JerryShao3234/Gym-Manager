@@ -42,7 +42,7 @@ export function Users() {
   const [tableData, setTableData] = useState<TableEntry[]>([]);
   const [networkError, setNetworkError] = useState(false);
   const [filter, setFilter] = useState<any>(null); // type is any incase we want to add future filters
-  const [memberCount, setMemberCount] = useState(0);
+  const [memberCountInfo, setMemberCountInfo] = useState(null);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   // [2] Change this to the default { key: value } pairs of your form.
   const addDefaultValues = useMemo(() => {
@@ -87,11 +87,7 @@ export function Users() {
   // [3] Change getUsers() to whatever your axios GET route is
 
   const initMemberCount = useCallback((memberCountInfo: any) => {
-    let numbMembers = 0;
-    for (let memberCount of memberCountInfo) {
-      numbMembers += memberCount.numMembers;
-    }
-    setMemberCount(numbMembers);
+    setMemberCountInfo(memberCountInfo);
   }, []);
 
   const initTable = useCallback(async () => {
@@ -330,7 +326,7 @@ export function Users() {
         {getContent}
         <div className="additional-content">
           <AdvancedUserFilter setFilter={setFilter} />
-          <AdvancedUserCount memberCount={memberCount} />
+          {memberCountInfo && <AdvancedUserCount memberCountInfo={memberCountInfo} />}
         </div>
       </div>
     </>
