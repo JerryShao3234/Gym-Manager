@@ -1,11 +1,3 @@
-Use Tutorial2;
-
-DROP TABLE dbo.Class;
-DROP TABLE dbo.Targets;
-DROP TABLE dbo.Does_Exercise;
-DROP TABLE dbo.BodyPart;
-DROP TABLE dbo.Users;
-
 CREATE TABLE Users (
 	Name varchar(127),
 	Email varchar(127),
