@@ -23,7 +23,7 @@ export function GymInput({
     // Patterns are from https://www.w3schools.com/tags/att_input_pattern.asp
     switch (inputType) {
       case "email":
-        return "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
+        return "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-z]{2,}$";
       case "time":
         return undefined;
       case "numerical":
