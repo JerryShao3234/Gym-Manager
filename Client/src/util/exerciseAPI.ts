@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TableEntry, BASE_URL, unwrapResponse, getErrorMessage } from "./rest";
+import { BASE_URL, getErrorMessage, TableEntry, unwrapResponse } from "./rest";
 
 export async function getExercises(): Promise<TableEntry[]> {
     try {
