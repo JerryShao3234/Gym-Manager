@@ -1,10 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { createClass, getClasses, TableEntry } from "../../util/rest";
+import {
+  createClass,
+  getAllExercises,
+  getClasses,
+  TableEntry,
+} from "../../util/rest";
 import { GymTable } from "../common/GymTable";
 import { Button } from "react-bootstrap";
 import { GymInput } from "../common/GymInput";
 import { AdvancedClassFilter } from "./AdvancedClassFilter";
+import { GymDropdown } from "../common/GymDropdown";
 
 interface FormSchema {
   Price: string;
@@ -28,6 +34,7 @@ export function Class() {
   const [tableData, setTableData] = useState<TableEntry[]>([]);
   const [networkError, setNetworkError] = useState(false);
   const [filter, setFilter] = useState<any>("");
+  const [allExercise, setAllExercises] = useState<string[]>([]);
 
   /*
         defaultValues stores the default values of the form FormSchema.
@@ -40,7 +47,7 @@ export function Class() {
       End_time: "",
       Class_ID: "",
       Instructor_name: "",
-      Exercise_name: "",
+      Exercise_name: "Bench Press",
     };
   }, []);
 
@@ -95,6 +102,7 @@ export function Class() {
         const updatedData = await getClasses(filter);
         setShowForm(false);
         setTableData(updatedData);
+        alert("Added new entry with class ID " + data.Class_ID);
       } catch (err: any) {
         alert(err.message);
       }
@@ -125,6 +133,12 @@ export function Class() {
     );
   }, [defaultValues, reset]);
 
+  useEffect(() => {
+    getAllExercises().then((exercises) => {
+      setAllExercises(exercises.map((ex) => ex["Exercise"]));
+    });
+  }, []);
+
   const renderForm = useMemo(() => {
     return (
       <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -135,6 +149,7 @@ export function Class() {
           formFieldName={"Price"}
           rules={{ required: true }}
           inputError={errors.Price}
+          inputType={"numerical"}
         />
         <GymInput
           className={errors.Name ? "error" : ""}
@@ -151,6 +166,7 @@ export function Class() {
           formFieldName={"Start_time"}
           rules={{ required: true }}
           inputError={errors.Start_time}
+          inputType={"time"}
         />
         <GymInput
           className={errors.End_time ? "error" : ""}
@@ -159,6 +175,7 @@ export function Class() {
           formFieldName={"End_time"}
           rules={{ required: true }}
           inputError={errors.End_time}
+          inputType={"time"}
         />
 
         <GymInput
@@ -179,18 +196,19 @@ export function Class() {
           inputError={errors.Instructor_name}
         />
 
-        <GymInput
-          className={errors.Exercise_name ? "error" : ""}
+        <GymDropdown
           label="Exercise_name"
           control={control}
           formFieldName={"Exercise_name"}
           rules={{ required: true }}
           inputError={errors.Exercise_name}
+          items={allExercise}
         />
         {renderFormButtons}
       </form>
     );
   }, [
+    allExercise,
     control,
     errors.Class_ID,
     errors.End_time,
