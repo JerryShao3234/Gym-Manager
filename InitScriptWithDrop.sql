@@ -68,10 +68,16 @@ INSERT INTO BodyPart VALUES
 
 INSERT INTO Targets VALUES
 	('Curls', 'Arms', 2),
-	('Bench Press', 'Chest', 2),
-	('Squat', 'Legs', 2),
 	('Shoulder Press', 'Shoulders', 2),
-	('Bench Press', 'Arms', 2);
+	('Bench Press', 'Chest', 9),
+	('Bench Press', 'Arms', 7),
+	('Bench Press', 'Legs', 2),
+	('Bench Press', 'Back', 2),
+	('Bench Press', 'Shoulders', 7),
+	('Squat', 'Arms', 2),
+	('Squat', 'Legs', 10),
+	('Squat', 'Back', 5),
+	('Squat', 'Shoulders', 2);
 
 INSERT INTO Users (Name, Email, MembershipType) VALUES
 	('Raymond Ng', 'rng@gmail.com', 'BASIC'),
