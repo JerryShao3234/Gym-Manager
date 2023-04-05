@@ -32,4 +32,10 @@ public class ExerciseController : ControllerBase{
         var response = _exerciseService.Get();
         return Ok(response);
     }
+
+    [HttpGet("targetAll")]
+    public OkObjectResult GetExercisesThatTargetAll() {
+        var response = _exerciseService.GetExercisesThatTargetAll();
+        return Ok(response);
+    }
 }

@@ -19,4 +19,9 @@ public class ExerciseService : IExerciseService {
     {
         return _exerciseRepository.Delete(nameOfExerciseToDelete);
     }
+
+    public List<Exercise> GetExercisesThatTargetAll() 
+    {
+        return _exerciseRepository.GetExercisesThatTargetAll();
+    }
 }
