@@ -1,3 +1,9 @@
+DROP TABLE Users;
+DROP TABLE Class;
+DROP TABLE Targets;
+DROP TABLE Does_Exercise;
+DROP TABLE BodyPart;
+
 CREATE TABLE Users (
 	Name varchar(127),
 	Email varchar(127),

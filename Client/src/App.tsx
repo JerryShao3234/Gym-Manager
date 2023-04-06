@@ -11,7 +11,7 @@ enum AVAILABLE_TABS {
   USERS = "USERS",
   EXERCISES = "EXERCISES",
   CLASS = "CLASS",
-  TARGETS = "TARGETS"
+  TARGETS = "TARGETS",
 }
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       USERS: <Users />,
       EXERCISES: <Exercises />,
       CLASS: <Class />,
-      TARGETS: <Targets />
+      TARGETS: <Targets />,
     };
   }, []);
 

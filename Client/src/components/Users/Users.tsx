@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import {
   createUser,
@@ -14,6 +20,7 @@ import { GymInput } from "../common/GymInput";
 import { AdvancedUserFilter } from "./AdvancedUserFilter";
 import { AdvancedUserCount } from "./AdvancedUserCount";
 import "./Users.scss";
+import { Alert } from "../common/Alert";
 
 export enum MembershipType {
   BASIC = "BASIC",
@@ -44,6 +51,8 @@ export function Users() {
   const [filter, setFilter] = useState<any>(null); // type is any incase we want to add future filters
   const [memberCountInfo, setMemberCountInfo] = useState(null);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const [alertList, setAlertList] = useState<ReactElement[]>([]);
+
   // [2] Change this to the default { key: value } pairs of your form.
   const addDefaultValues = useMemo(() => {
     return {
@@ -111,12 +120,24 @@ export function Users() {
         await createUser(data);
         addReset(addDefaultValues);
         await initTable();
-        alert("Successfully added user with email " + data.email);
+        setAlertList(
+          alertList.concat(
+            <Alert
+              key={Math.random()}
+              type={"success"}
+              message={"Successfully added user with email " + data.email}
+            />
+          )
+        );
       } catch (err: any) {
-        alert(err.message);
+        setAlertList(
+          alertList.concat(
+            <Alert key={Math.random()} type={"danger"} message={err.message} />
+          )
+        );
       }
     },
-    [addDefaultValues, addReset, initTable]
+    [addDefaultValues, addReset, alertList, initTable]
   );
 
   // Update
@@ -126,12 +147,24 @@ export function Users() {
         const numUpdatedEntries = await updateUser(data);
         updateReset(updateDefaultValues);
         await initTable();
-        alert(`Successfully updated ${numUpdatedEntries} entries.`);
+        setAlertList(
+          alertList.concat(
+            <Alert
+              key={Math.random()}
+              type={"success"}
+              message={`Successfully updated ${numUpdatedEntries} entries.`}
+            />
+          )
+        );
       } catch (err: any) {
-        alert(err.message);
+        setAlertList(
+          alertList.concat(
+            <Alert key={Math.random()} type={"error"} message={err.message} />
+          )
+        );
       }
     },
-    [initTable, updateDefaultValues, updateReset]
+    [alertList, initTable, updateDefaultValues, updateReset]
   );
 
   // Form error callback. Technically we don't need this, but I'll leave it here
@@ -171,7 +204,7 @@ export function Users() {
     return (
       <>
         <GymInput
-          className={addErrors.email ? "error" : ""}
+          className={addErrors.email ? "danger" : ""}
           label="Email"
           control={addControl}
           formFieldName={"email"}
@@ -293,13 +326,27 @@ export function Users() {
     async (entry: TableEntry) => {
       try {
         await deleteUser(entry["email"]);
-        alert("Successfully deleted entry with email " + entry["email"]);
+        setAlertList(
+          alertList.concat(
+            <Alert
+              key={Math.random()}
+              type={"success"}
+              message={
+                "Successfully deleted entry with email " + entry["email"]
+              }
+            />
+          )
+        );
         await initTable();
       } catch (err: any) {
-        alert(err.message);
+        setAlertList(
+          alertList.concat(
+            <Alert key={Math.random()} type={"danger"} message={err.message} />
+          )
+        );
       }
     },
-    [initTable]
+    [alertList, initTable]
   );
 
   // Shows either the table or a network error message. No need to change.
@@ -329,8 +376,14 @@ export function Users() {
         {getContent}
         <div className="additional-content">
           <AdvancedUserFilter setFilter={setFilter} />
-          {memberCountInfo && <AdvancedUserCount memberCountInfo={memberCountInfo} />}
+          {memberCountInfo && (
+            <AdvancedUserCount memberCountInfo={memberCountInfo} />
+          )}
         </div>
+      </div>
+
+      <div className="position-absolute bottom-0 end-0 m-4 flex flex-col">
+        {alertList}
       </div>
     </>
   );
