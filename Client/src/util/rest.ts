@@ -83,7 +83,7 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
       const classIDFilter = optionalFilter.classID
         ? optionalFilter.classID
         : "null";
-      const numberOfSetsFilter = optionalFilter.classWithExerciseInput ? optionalFilter.numberOfSets : "null";
+      const numberOfSetsFilter = optionalFilter.classWithExerciseInput ? "optionalFilter.numberOfSets" : "null";
       urlParams =
         "?price=" +
         priceFilter +
