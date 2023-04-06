@@ -83,6 +83,7 @@ public class ClassRepository : IClassRepository
                 string end_time = "null";
                 string instructor_name = "null";
                 string exercise_name = "null";
+                string number_of_sets = "null";
 
                 //check if reader contains the attribute
                 if (req.Contains("name"))
@@ -99,7 +100,9 @@ public class ClassRepository : IClassRepository
                     instructor_name = reader["Instructor_name"].ToString();
                 if (req.Contains("exercise_name"))
                     exercise_name = reader["Exercise_Name"].ToString();
-                classes.Add(new Class(name, class_ID, price, start_time, end_time, instructor_name, exercise_name));
+                if (req.Contains("number_of_sets"))
+                    number_of_sets = reader["Number_of_sets"].ToString();
+                classes.Add(new Class(name, class_ID, price, start_time, end_time, instructor_name, exercise_name, number_of_sets));
             }
 
             connection.Close();

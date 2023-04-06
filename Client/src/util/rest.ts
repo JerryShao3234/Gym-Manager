@@ -64,7 +64,7 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
   try {
     //the URL parameters can be anything except "null"
     let urlParams =
-      "?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1";
+      "?price=1&start_time=2019-01-01%2001:01:00&end_time=2019-01-01%2002:01:00&instructor_name=test&exercise_name=Squat&name=test&class_ID=1&number_of_sets=null";
     if (optionalFilter) {
       const priceFilter = optionalFilter.price ? optionalFilter.price : "null";
       const startTimeFilter = optionalFilter.startTime
@@ -83,6 +83,7 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
       const classIDFilter = optionalFilter.classID
         ? optionalFilter.classID
         : "null";
+      const numberOfSetsFilter = optionalFilter.classWithExerciseInput ? optionalFilter.numberOfSets : "null";
       urlParams =
         "?price=" +
         priceFilter +
@@ -97,7 +98,9 @@ export async function getClasses(optionalFilter: any): Promise<TableEntry[]> {
         "&name=" +
         nameFilter +
         "&class_ID=" +
-        classIDFilter;
+        classIDFilter +
+        "&number_of_sets=" +
+        numberOfSetsFilter;
     }
     const response = optionalFilter
       ? await axios.get(
