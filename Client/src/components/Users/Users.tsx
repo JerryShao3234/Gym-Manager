@@ -159,7 +159,7 @@ export function Users() {
       } catch (err: any) {
         setAlertList(
           alertList.concat(
-            <Alert key={Math.random()} type={"error"} message={err.message} />
+            <Alert key={Math.random()} type={"danger"} message={err.message} />
           )
         );
       }
@@ -204,7 +204,7 @@ export function Users() {
     return (
       <>
         <GymInput
-          className={addErrors.email ? "danger" : ""}
+          className={addErrors.email ? "error" : ""}
           label="Email"
           control={addControl}
           formFieldName={"email"}
