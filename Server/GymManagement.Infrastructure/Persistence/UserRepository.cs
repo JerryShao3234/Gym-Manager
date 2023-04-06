@@ -32,11 +32,18 @@ public class UserRepository : IUserRepository
         }
     }
 
-    private string joinNonEmpty(List<string> strings)
+    private string joinNonEmptyWithComma(List<string> strings)
     {
         strings.RemoveAll(s => s == "");
         return String.Join(",", strings);
     }
+
+    private string joinNonEmptyWithAND(List<string> strings)
+    {
+        strings.RemoveAll(s => s == "");
+        return String.Join(" AND ", strings);
+    }
+
 
     public int Update(UpdateRequest updateObj)
     {
@@ -45,14 +52,14 @@ public class UserRepository : IUserRepository
         string connectionString = "Data Source=localhost;Initial Catalog=Tutorial2;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string setString = " SET " + joinNonEmpty(new List<string>()
+            string setString = " SET " + joinNonEmptyWithComma(new List<string>()
             {
                 (String.IsNullOrEmpty(updateObj.SetName) ? "" : "Name = @SetName\n"),
                 (String.IsNullOrEmpty(updateObj.SetEmail) ? "" : "Email = @SetEmail"),
                 (String.IsNullOrEmpty(updateObj.SetMembershipType) ? "" : "MembershipType = @SetMembershipType")
             });
             Console.WriteLine(setString);
-            string whereString = " WHERE " + joinNonEmpty(new List<string>()
+            string whereString = " WHERE " + joinNonEmptyWithAND(new List<string>()
             {
                 (String.IsNullOrEmpty(updateObj.WhereName) ? "" : "Name = @WhereName"),
                 (String.IsNullOrEmpty(updateObj.WhereEmail) ? "" : ("Email = @WhereEmail")),
