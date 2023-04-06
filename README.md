@@ -3,6 +3,17 @@
 ## Summary
 This application is a management tool for gym managers to keep track of gym logistics and users. Gym managers can query information like a list of users, equipment information such as exercises that use it, and the body parts that those exercises target.
 
+## Changes since Milestone 2
+
+Changes not listed in other milestones:
+- Any instances of type Date have been changed to type Time because we don’t use
+
+Additional changes listed in Milestone 4:
+- User’s MembershipType was made NOT NULL to facilitate with implementing selection
+- Does_Exercise’s foreign key to Class was reversed (i.e. now Class has the foreign key referencing Does_Exercise) to support on delete cascade due to an original design mistake from Milestone 2.
+- BodyPart’s Name was renamed to bp_Name so that it’s easier to read 
+- Offers_Class_1 was renamed to Class because we no longer have 2 tables named Class. Additionally, we are not implementing Gym, so we don’t need the foreign key Gym_Address.
+
 ## Code-related
 ### Project setup
 The following commands are meant to be run from the project root. 
